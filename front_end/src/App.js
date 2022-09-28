@@ -10,7 +10,7 @@ function App() {
     <div>
       {/* <Allroutes/>
       <Navbar/> */}
-<Log_Route/>
+
     </div>
   );
 }
