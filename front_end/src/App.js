@@ -6,15 +6,15 @@ import Signup from './Pages/Signup';
 import Onbording from './Pages/Onbording';
 import Createteam from './Pages/Createteamform';
 
+
+
+
 function App() {
   return (
-    <div>
-       <Allroutes/>
+    <div className='App'>
+      <Allroutes />
       {/* <Navbar/>  */}
-       {/* <Log_Route/>  */}
-     
-
-
+      {/* <Log_Route/>  */}
 
     </div>
   );
