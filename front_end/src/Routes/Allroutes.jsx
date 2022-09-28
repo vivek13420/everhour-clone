@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 const Allroutes = () => {
   return (
       <div>
+        
           <Routes>
               <Route path="/home" element={"home"} />
               <Route path="/pricing" element={"pricing"} />
