@@ -8,8 +8,9 @@ import Log_Route from "./Components/Log_Route/Log_Route"
 function App() {
   return (
     <div>
-      {/* <Allroutes/>
-      <Navbar/> */}
+      <Allroutes />
+      {/* <Navbar/>  */}
+      {/* <Log_Route/>  */}
 
     </div>
   );
