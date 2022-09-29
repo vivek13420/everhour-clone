@@ -18,7 +18,7 @@ app.get('/', async (req, res)=>{
 
 
 
-
+module.exports = app;
 
 
 // const authMiddleware = async(req, res, next) => {

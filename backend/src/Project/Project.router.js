@@ -5,48 +5,62 @@ const User = require("../Components/Users/Users.model");
 const app = express.Router();
 
 app.get("/", async (req, res) => {
-  const id = req.body;
-  
-  const projects = await Project.find();
-  projects.filter(x=> x.teamMembers.includues(id));
+  const { id } = req.body;
 
+  let projects = await Project.find();
+  projects = projects.filter(x => {
+    if (x.teamMembers) {
+      if (x.teamMembers.includes(id)) return true;
+    }
+    if (x.projectAdmin == id) return true;
+    else return false;
+  });
 
   res.status(200).send(projects);
-
-
 });
 
 app.post("/", async (req, res) => {
-  const id = req.headers;
-        const user = await User.findById(id);
-        if(user.role != 'admin') req.status(400).send("User is not an admin");
+  const {id} = req.headers;
+  const user = await User.findById(id);
+  if (user.role != "admin") req.status(400).send("User is not an admin");
 
   try {
-    const newProject = await Project.create(req.body);
+    const newProject = await Project.create({
+        ...req.body,
+        projectAdmin: id
+    });
     res.status(200).send(newProject);
   } catch (e) {
-    res.status(400).send('Error');
+    res.status(400).send("Error");
     console.log(e);
   }
 });
+//projects/:id
+app.delete('/:id', async (req, res)=>{
+       const id = req.params.id;
+   try{
+        let afterDelete = await Project.findByIdAndDelete(id);
+        res.status(200).send(afterDelete);
+   }catch(e){
+    console.log(e);
+   }
+} )
+
+
+app.patch('/:id', async(req, res)=>{
+    const id = req.params.id;
+    try{
+       
+    }
+    catch(e){
+        req.status(400).send("error");
+        console.log(e.message);
+    }
+})
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports = app;
 
 // const authMiddleware = async(req, res, next) => {
 //     const token = req.headers.token;
