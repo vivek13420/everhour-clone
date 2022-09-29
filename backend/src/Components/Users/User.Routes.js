@@ -2,6 +2,16 @@ const express = require("express");
 const User = require("./Users.model");
 const app = express.Router();
 app.get("/", async (req, res) => {
+  let { r } = res.query;
+  try {
+    if (r) {
+      let b = await User.find({ role: r });
+      console.log(b);
+      res.send(b);
+    }
+  } catch (e) {
+    res.status(401).send(e.message);
+  }
   let a = await User.find();
 
   res.send(a);
