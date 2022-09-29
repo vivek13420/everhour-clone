@@ -5,7 +5,6 @@ import {
   FormLabel,
   Input,
   InputGroup,
-  HStack,
   InputRightElement,
   Stack,
   Button,
@@ -91,6 +90,7 @@ export default function Onbording() {
                   I have read and agree the Terms and Privacy Policy
                 </Checkbox>
               </Stack>
+
               <Button
                 loadingText="Submitting"
                 size="lg"
