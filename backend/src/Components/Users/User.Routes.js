@@ -2,7 +2,9 @@ const express = require("express");
 const User = require("./Users.model");
 const app = express.Router();
 app.get("/", async (req, res) => {
-  let { r } = res.query;
+  
+  let {r}  = req.query;
+  // console.log('ahahahah');
   try {
     if (r) {
       let b = await User.find({ role: r });
