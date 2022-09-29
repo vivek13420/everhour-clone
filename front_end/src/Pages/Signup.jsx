@@ -10,12 +10,12 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
-import style from "../styles/styles.module.css";
+// import style from "../styles/styles.module.css";
 import Griddrop from "./Review";
 
 const Signup = () => {
   return (
-    <Box>
+    <Box>  
       <Stack
         as={Box}
         textAlign={"center"}
