@@ -9,12 +9,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import style from "../styles/styles.module.css";
+import { Link } from "react-router-dom";
+// import style from "../styles/styles.module.css";
 import Griddrop from "./Review";
 
 const Signup = () => {
   return (
-    <Box>
+    <Box>  
       <Stack
         as={Box}
         textAlign={"center"}
@@ -42,8 +43,8 @@ const Signup = () => {
         >
           <Center>
             <Button
-              w={"full"}
-              maxW={"md"}
+              w={"80%"}
+              
               borderColor={"gray"}
               variant={"outline"}
               size={["sm", "md", "md", "lg"]}
@@ -56,18 +57,18 @@ const Signup = () => {
               }
             >
               <Center>
-                <Text mb="10%">Sign in with Google</Text>
+                <Text ml="-30%" mb="10%">Sign in with Google</Text>
               </Center>
             </Button>
           </Center>
           <Text>or</Text>
           <Input
             size={["sm", "md", "md", "lg"]}
-            w="300px"
+            w="72%"
             placeholder={"Work Email..."}
             borderColor="gray"
           />
-
+<Link to="/onboarding">
           <Button
             colorScheme={"#4ade80 "}
             bg={"#4ade80 "}
@@ -76,8 +77,11 @@ const Signup = () => {
               bg: "#22c55e",
             }}
           >
-            Get Started
-          </Button>
+            
+              Get Started
+             
+            </Button>
+            </Link>
           <Text color={"gray"}>
             Free to try • No credit card required •1-minute signup
           </Text>
