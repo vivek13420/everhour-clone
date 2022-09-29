@@ -84,7 +84,7 @@ export function Review(props) {
         backgroundSize: "cover",
         top: 0,
         left: 0,
-        backgroundImage: backgrounds[index % 1],
+        // backgroundImage: backgrounds[index ],
       }}
     >
       <Flex
