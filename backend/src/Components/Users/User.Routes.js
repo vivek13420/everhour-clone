@@ -2,19 +2,13 @@ const express = require("express");
 const User = require("./Users.model");
 const app = express.Router();
 app.get("/", async (req, res) => {
-    let a = await User.find();
-    console.log(a)
+  let a = await User.find();
+
   res.send(a);
 });
 app.post("/login", async (req, res) => {
-    let { email, password } = req.body;
-    // let { token } = req.headers;
-    // console.log(req.headers)
-    // console.log(token)
-    // token = token.split(":");
-    // console.log(token)
-    // let [id, email, password] = token;
-    // console.log(id,email,password)
+  let { email, password } = req.body;
+
   try {
     let user = await User.findOne({ email, password });
 
@@ -23,7 +17,7 @@ app.post("/login", async (req, res) => {
     }
 
     res.send({
-      token: `${user.id}:${user.email}:${user.password}`,
+      token: `${user.id}:${user.email}:${user.password}:${user.role}`,
     });
   } catch (e) {
     res.status(500).send(e.message);
@@ -43,7 +37,7 @@ app.post("/signup", async (req, res) => {
     }
     let createdUser = await User.create(req.body);
     res.send({
-      token: `${createdUser.id}:${createdUser.email}:${createdUser.password}`,
+      token: `${createdUser.id}:${createdUser.email}:${createdUser.password}:${createdUser.role}`,
     });
   } catch (e) {
     res.status(500).send(e.message);
