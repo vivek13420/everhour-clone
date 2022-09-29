@@ -58,7 +58,16 @@ app.patch('/:id', async(req, res)=>{
     }
 })
 
-
+app.patch('/:id',  async (req, res)=>{
+    const id  = req.params.id;
+    try{
+      let updatedProject = await  Project.findByIdAndUpdate(id, req.body  ,  {new: true});
+      req.status(200).send(updatedProject);
+    }
+    catch(e){
+      req.status(401).send(e.message);
+    }
+})
 
 module.exports = app;
 
