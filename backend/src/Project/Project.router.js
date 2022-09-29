@@ -25,9 +25,28 @@ app.post("/", async (req, res) => {
     const newProject = await Project.create(req.body);
     res.status(200).send(newProject);
   } catch (e) {
+    res.status(400).send('Error');
     console.log(e);
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // const authMiddleware = async(req, res, next) => {
 //     const token = req.headers.token;
