@@ -16,6 +16,7 @@ function App() {
       {/* <Navbar/>  */}
       {/* <Log_Route/>  */}
 
+
     </div>
   );
 }

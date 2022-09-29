@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Flex, Image, Link, SimpleGrid, Text, IconButton } from "@chakra-ui/react"
+import { Box, Button, Flex, Image, Link, SimpleGrid, Text, IconButton, Hide, Show } from "@chakra-ui/react"
 import { NavLink } from 'react-router-dom'
 import everhour from "./images/everhour.png"
 import { IoLogOutOutline } from "react-icons/io5"
@@ -14,10 +14,15 @@ import { AiOutlineSetting } from "react-icons/ai"
 import {FcBusinessman} from "react-icons/fc"
 import {ImProfile} from "react-icons/im"
 
+
 const Sidebar = () => {
     return (
         <>
-            <Box width="100%" >
+        <Hide below='md'>
+
+
+       
+            <Box width="100%"  >
                 <Flex gap={10}>
                     <NavLink to='/'  >
                         <Flex gap={3} mb="1.5em" alignItems="center" >
@@ -99,7 +104,9 @@ const Sidebar = () => {
 
             </Box>
 
+            </Hide>
 
+            
         </>
     )
 }
