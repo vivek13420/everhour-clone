@@ -39,9 +39,8 @@ const Navbar = () => {
   return (
     <Box
       pt={2}
-      position="sticky"
+      // position="sticky"
       top="-18px"
-      z-index="1"
       className={style.main}
     >
       <HStack

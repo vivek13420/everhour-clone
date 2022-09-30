@@ -8,6 +8,7 @@
     align-items: center;
     background-color: white;
     position: sticky;
+    z-index: 2;
   }
   
   .image {
