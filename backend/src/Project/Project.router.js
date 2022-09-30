@@ -4,30 +4,31 @@ const User = require("../Components/Users/Users.model");
 
 const app = express.Router();
 
-app.get("/", async (req, res) => {
-  const { id } = req.body;
-
-  let projects = await Project.find();
-  projects = projects.filter(x => {
-    if (x.teamMembers) {
-      if (x.teamMembers.includes(id)) return true;
-    }
-    if (x.projectAdmin == id) return true;
-    else return false;
-  });
-
-  res.status(200).send(projects);
+app.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    let projects = await Project.find();
+    projects = projects.filter(x => {
+      if (x.teamMembers) {
+        if (x.teamMembers.includes(id)) return true;
+      }
+      if (x.projectAdmin == id) return true;
+      else return false;
+    });
+    res.status(200).send(projects);
+  } catch (e) {
+    res.status(401).send("You did something wrong please check");
+  }
 });
 
-app.post("/", async (req, res) => {
-  const {id} = req.headers;
-  const user = await User.findById(id);
-  if (user.role != "admin") res.status(400).send("User is not an admin");
-
-  try {
+app.post("/:id", async (req, res) => {
+  try{
+    const { id } = req.params;
+    const user = await User.findById(id);
+    if (user.role != "admin") res.status(400).send("User is not an admin");
     const newProject = await Project.create({
-        ...req.body,
-        projectAdmin: id
+      ...req.body,
+      projectAdmin: id,
     });
     res.status(200).send(newProject);
   } catch (e) {
@@ -36,30 +37,43 @@ app.post("/", async (req, res) => {
   }
 });
 //projects/:id
-app.delete('/:id', async (req, res)=>{
-       const id = req.params.id;
-   try{
-        let afterDelete = await Project.findByIdAndDelete(id);
-        res.status(200).send(afterDelete);
-   }catch(e){
+app.delete("/:id", async (req, res) => {
+  
+  try {
+    const id = req.params.id;
+    let afterDelete = await Project.findByIdAndDelete(id);
+    res.status(200).send(afterDelete);
+  } catch (e) {
     console.log(e);
-   }
-} )
+  }
+});
 
-
-
-app.patch('/:id',  async (req, res)=>{
+app.patch("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
     
-    try{
-      const id  = req.params.id;
-      let {teamMembers} = await Project.findById(id);
-      let updatedProject = await  Project.findByIdAndUpdate(id, { teamMembers: [...teamMembers, req.body.teamMembers] }  ,  {new: true});
+    let t= req.body.teamMembers;
+    if(t != undefined){
+      let { teamMembers } = await Project.findById(id);
+      let updatedProject = await Project.findByIdAndUpdate(
+        id,
+        { teamMembers: [...teamMembers, req.body.teamMembers] },
+        { new: true },
+      )
+      res.status(200).send(updatedProject);    
+    }
+    else{
+      let updatedProject = await Project.findByIdAndUpdate(id, req.body, {new: true});
       res.status(200).send(updatedProject);
     }
-    catch(e){
-      res.status(401).send(e.message);
-    }
-})
+  } catch (e) {
+    res.status(401).send(e.message);
+  }
+});
+
+
+
+
 
 module.exports = app;
 
