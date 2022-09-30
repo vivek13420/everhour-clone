@@ -1,10 +1,11 @@
-import { Box, Flex, Hide, Image, Show, Text } from '@chakra-ui/react'
+import { Box, Divider, Flex, Hide, Image, Show, Text } from '@chakra-ui/react'
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from '../Home/Home'
 import Humber from '../Sidebar/Humber'
 import Sidebar from '../Sidebar/Sidebar'
 import everhour from "../Sidebar/images/everhour.png"
+import Projects from '../Projects/Projects'
 
 const AllRoute = () => {
   return (
@@ -21,12 +22,13 @@ const AllRoute = () => {
           </Hide>
         </Box>
 
+
 <Hide below='md'>
-        <Box border="2px solid red" ml="17%" width={'100%'} height="700px">
+        <Box  ml="17%" width={'100%'} >
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/time" element={<h1>time</h1>} />
-            <Route path="/project" element={<h1>project</h1>} />
+            <Route path="/project" element={<Projects/>} />
             <Route path="/client" element={<h1>client</h1>} />
             <Route path="/team" element={<h1>team</h1>} />
             <Route path="/report" element={<h1>report</h1>} />
@@ -40,11 +42,11 @@ const AllRoute = () => {
       </Flex>
 
       <Show below='md'>
-        <Box border="2px solid red"  width={'100%'} height="700px">
+        <Box border="2px solid red"  width={'100%'}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/time" element={<h1>time</h1>} />
-            <Route path="/project" element={<h1>project</h1>} />
+            <Route path="/project" element={<Projects/>} />
             <Route path="/client" element={<h1>client</h1>} />
             <Route path="/team" element={<h1>team</h1>} />
             <Route path="/report" element={<h1>report</h1>} />
