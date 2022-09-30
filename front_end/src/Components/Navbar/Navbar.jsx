@@ -39,8 +39,12 @@ const Navbar = () => {
   return (
     <Box
       pt={2}
+
       // position="sticky"
       top="-18px"
+
+     
+
       className={style.main}
     >
       <HStack
@@ -164,6 +168,7 @@ const Navbar = () => {
           <Link to="/login" className={style.text}>
             Login
           </Link>
+          <Link to="/signup">
           <Button
             variant={"solid"}
             size="md"
@@ -172,7 +177,8 @@ const Navbar = () => {
             // mt="0px"
           >
             Signup
-          </Button>
+            </Button>
+            </Link>
         </Flex>
         <HamburgerMenu/>
       </HStack>

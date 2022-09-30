@@ -13,12 +13,14 @@ import {
   useColorModeValue,
   Link,
   Checkbox,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export default function Onbording() {
   const [showPassword, setShowPassword] = useState(false);
+  const toast=useToast()
 
   return (
     <Flex
@@ -47,21 +49,21 @@ export default function Onbording() {
               <FormControl id="firstName" isRequired>
                 <FormLabel>Full Name</FormLabel>
 
-                <Input type="text" />
+                <Input type="text" placeholder=" Type Full Name" />
               </FormControl>
             </Box>
             <Box>
               <FormControl id="firstName" isRequired>
-                <FormLabel>Job Title</FormLabel>
+                <FormLabel>Role</FormLabel>
 
-                <Input type="text" />
+                <Input type="text"  placeholder="e.g:client ,employee/ admin"/>
               </FormControl>
             </Box>
             <Box></Box>
 
             <FormControl id="email" isRequired>
               <FormLabel>Confirm Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email"  placeholder="e.g:alisha@gmail.com"/>
             </FormControl>
             <FormControl id="email">
               <FormLabel>Phone number</FormLabel>
@@ -73,7 +75,7 @@ export default function Onbording() {
                 <Input type={showPassword ? "text" : "password"} />
                 <InputRightElement h={"full"}>
                   <Button
-                    mt={"-20px"}
+                    mt={"-10px"}
                     variant={"ghost"}
                     onClick={() =>
                       setShowPassword((showPassword) => !showPassword)
@@ -99,6 +101,13 @@ export default function Onbording() {
                 _hover={{
                   bg: "#22c55e ",
                 }}
+                onClick={()=>toast({
+                  title: 'Account created.',
+                  position:"top",
+                  status: 'success',
+                  duration: 9000,
+                  isClosable: true,
+                })}
               >
                 Sign up
               </Button>

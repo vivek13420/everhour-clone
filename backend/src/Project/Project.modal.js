@@ -8,9 +8,8 @@ const projectSchema = new mongoose.Schema({
     hasBudget: {type: Boolean, default: true},
     projectAdmin: {type : mongoose.Schema.Types.ObjectId, ref: 'user'},
     
-    
-
 })
+
 
 
 const Project = mongoose.model('project', projectSchema);

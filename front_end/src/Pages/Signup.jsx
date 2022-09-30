@@ -3,19 +3,21 @@ import {
   Button,
   Center,
   Heading,
-  Image,
   Input,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
-import style from "../styles/styles.module.css";
+import { FcGoogle } from "react-icons/fc";
+import Navbar from "../Components/Navbar/Navbar";
+
 import Griddrop from "./Review";
 
 const Signup = () => {
   return (
     <Box>
+      <Navbar />
       <Stack
         as={Box}
         textAlign={"center"}
@@ -41,49 +43,40 @@ const Signup = () => {
           alignSelf={"center"}
           position={"relative"}
         >
-          <Center>
+          <Center p={8}>
             <Button
-              w={"80%"}
-              
-              borderColor={"gray"}
+              w={"290px"}
+              maxW={"lg"}
               variant={"outline"}
-              size={["sm", "md", "md", "lg"]}
-              leftIcon={
-                <Image
-                  w="20%"
-                  mb="20%"
-                  src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg.icons8.com%2Fcolor%2F2x%2Fgoogle-logo.png&f=1&nofb=1"
-                />
-              }
+              borderColor={"#a8a29e "}
+              leftIcon={<FcGoogle />}
             >
               <Center>
-                <Text ml="-30%" mb="10%">Sign in with Google</Text>
+                <Text>Sign in with Google</Text>
               </Center>
             </Button>
           </Center>
-          <Text>or</Text>
+          <Text color={"#a8a29e "} mt={"-60%"}>or</Text>
           <Input
             size={["sm", "md", "md", "lg"]}
-            w="72%"
+            w="290px"
             placeholder={"Work Email..."}
-            borderColor="gray"
+            borderColor="#a8a29e "
           />
-<Link to="/onboarding">
-          <Button
-            colorScheme={"#4ade80 "}
-            bg={"#4ade80 "}
-            px={6}
-            _hover={{
-              bg: "#22c55e",
-            }}
-          >
-            
+          <Link to="/onboarding">
+            <Button
+              colorScheme={"#4ade80 "}
+              bg={"#4ade80 "}
+              px={6}
+              _hover={{
+                bg: "#22c55e",
+              }}
+            >
               Get Started
-             
             </Button>
-            </Link>
+          </Link>
           <Text color={"gray"}>
-            Free to try • No credit card required •1-minute signup
+            Free to try • No credit card required • 1-minute signup
           </Text>
         </Stack>
       </Stack>
