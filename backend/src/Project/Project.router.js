@@ -22,7 +22,7 @@ app.get("/", async (req, res) => {
 app.post("/", async (req, res) => {
   const {id} = req.headers;
   const user = await User.findById(id);
-  if (user.role != "admin") req.status(400).send("User is not an admin");
+  if (user.role != "admin") res.status(400).send("User is not an admin");
 
   try {
     const newProject = await Project.create({
@@ -47,25 +47,18 @@ app.delete('/:id', async (req, res)=>{
 } )
 
 
-app.patch('/:id', async(req, res)=>{
-    const id = req.params.id;
-    try{
-       
-    }
-    catch(e){
-        req.status(400).send("error");
-        console.log(e.message);
-    }
-})
 
 app.patch('/:id',  async (req, res)=>{
-    const id  = req.params.id;
+    
+
     try{
-      let updatedProject = await  Project.findByIdAndUpdate(id, req.body  ,  {new: true});
-      req.status(200).send(updatedProject);
+      const id  = req.params.id;
+      let {teamMembers} = await Project.findById(id);
+      let updatedProject = await  Project.findByIdAndUpdate(id, { teamMembers: [...teamMembers, req.body.teamMembers] }  ,  {new: true});
+      res.status(200).send(updatedProject);
     }
     catch(e){
-      req.status(401).send(e.message);
+      res.status(401).send(e.message);
     }
 })
 
