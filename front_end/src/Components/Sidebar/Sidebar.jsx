@@ -25,7 +25,7 @@ const Sidebar = () => {
             <Box width="100%"  >
                 <Flex gap={10}>
                     <NavLink to='/'  >
-                        <Flex gap={3} mb="1.5em" alignItems="center" >
+                        <Flex gap={3} mb="2em" alignItems="center" >
                             <Image src={everhour} w='25px' />
                             <Text color="#57534e " fontWeight={"semibold"} fontSize='sm' textDecoration='underline' >Everhour</Text>
 

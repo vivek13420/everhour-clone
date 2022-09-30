@@ -50,7 +50,6 @@ app.delete('/:id', async (req, res)=>{
 
 app.patch('/:id',  async (req, res)=>{
     
-
     try{
       const id  = req.params.id;
       let {teamMembers} = await Project.findById(id);
