@@ -18,8 +18,12 @@
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
+<<<<<<< HEAD
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
+=======
+    "swiper": "^8.4.2",
+>>>>>>> c14daa82a7744aa214da9246cb2f5d9b508662c6
     "web-vitals": "^2.1.4"
   },
   "scripts": {

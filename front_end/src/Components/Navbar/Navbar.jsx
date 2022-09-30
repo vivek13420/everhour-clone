@@ -39,10 +39,12 @@ const Navbar = () => {
   return (
     <Box
       pt={2}
-      position
-     
+
+      // position="sticky"
       top="-18px"
+
      
+
       className={style.main}
     >
       <HStack
