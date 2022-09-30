@@ -1,3 +1,4 @@
+const PORT = process.env.PORT || 8080
 const express = require("express")
 const cors = require("cors")
 const connect = require("./Components/Config/db");
@@ -18,7 +19,8 @@ app.get("/", (req, res) => {
     res.send("WELCOME TO CONSTRUCT WEEK")
 })
 
-app.listen(8080, async() => {
+
+app.listen(PORT, async() => {
     await connect();
     console.log("server started at http://localhost:8080");
 })
