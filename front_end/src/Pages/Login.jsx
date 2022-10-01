@@ -22,16 +22,8 @@ import Navbar from "../Components/Navbar/Navbar";
 import { login } from "../Store/auth.action.type";
 
 export default function Login() {
-<<<<<<< HEAD
-  // const[notauth,setnotauth]=useState(true)
-  let token = useSelector((store) => store.auth.token);
-  let error = useSelector((store)=> store.auth.error)
-  let [email, password] = token.split(":");
-  console.log(email, password, "fgsd");
-=======
   let token = useSelector(store => store.auth.token);
   let auth = useSelector(store => store.auth);
->>>>>>> 3aa45b208ddd38864a7d675fdbb56762b5113ff0
 
   const toast = useToast();
   const [logincred, setlogincred] = useState({});
@@ -59,24 +51,14 @@ export default function Login() {
         title: "Successfully Logged In",
         status: "success",
         position: "top",
-        duration: 1300,
+        duration: 1500,
         isClosable: true,
       });
       setTimeout(() => {
         navigate("/dashboard");
-      }, 1200);
+      }, 1000);
     }
   }, [token]);
-  useEffect(()=>{
-   if(error){
-    toast({
-      title: "Email/Password Wrong",
-      status: "error",
-      position: "top",
-      isClosable: true,
-    });
-   }
-  }, [error])
 
   useEffect(() => {
     if (auth.error) {
