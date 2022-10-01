@@ -6,8 +6,8 @@ import Humber from '../Sidebar/Humber'
 import Sidebar from '../Sidebar/Sidebar'
 import everhour from "../Sidebar/images/everhour.png"
 import Projects from '../Projects/Projects'
-
-const AllRoute = () => {
+// dsfsdfsdfsd
+const Log_Route = () => {
   return (
     <>
         <Box>
@@ -26,15 +26,15 @@ const AllRoute = () => {
 <Hide below='md'>
         <Box  ml="17%" width={'100%'} >
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/time" element={<h1>time</h1>} />
-            <Route path="/project" element={<Projects/>} />
-            <Route path="/client" element={<h1>client</h1>} />
-            <Route path="/team" element={<h1>team</h1>} />
-            <Route path="/report" element={<h1>report</h1>} />
-            <Route path="/setting" element={<h1>setting</h1>} />
-            <Route path="/profile" element={<h1>profile</h1>} />
-            <Route path="/signout" element={<h1>signout</h1>} />
+            <Route path="/" element={<Home />} />   
+            <Route path="time" element={<h1>time</h1>} />
+            <Route path="project" element={<Projects/>} />
+            <Route path="client" element={<h1>client</h1>} />
+            <Route path="team" element={<h1>team</h1>} />
+            <Route path="report" element={<h1>report</h1>} />
+            <Route path="setting" element={<h1>setting</h1>} />
+            <Route path="profile" element={<h1>profile</h1>} />
+            <Route path="signout" element={<h1>signout</h1>} />
           </Routes>
         </Box>
 </Hide>
@@ -60,4 +60,4 @@ const AllRoute = () => {
   )
 }
 
-export default AllRoute
+export default Log_Route

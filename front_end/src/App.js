@@ -7,14 +7,17 @@ import Onbording from './Pages/Onbording';
 import Createteam from './Pages/Createteamform';
 import "./App.css"
 
-
-
 function App() {
   return (
     <div className='App'>
       <Allroutes />
       {/* <Navbar/>  */}
+      
+
       {/* <Log_Route/>  */}
+
+
+      
 
     </div>
   );
