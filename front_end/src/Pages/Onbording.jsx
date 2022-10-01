@@ -14,13 +14,45 @@ import {
   Link,
   Checkbox,
   useToast,
+  Center,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { signup } from "../Store/signupaction";
+import { useNavigate } from "react-router-dom";
 
 export default function Onbording() {
+  const token = useSelector((store) => store.signup.token);
+ 
   const [showPassword, setShowPassword] = useState(false);
-  const toast=useToast()
+  const toast = useToast();
+  const [creds, setcreds] = useState({});
+  const dispatch = useDispatch();
+  const navigate=useNavigate()
+
+  function onchange(e) {
+    const { name, value } = e.target;
+    setcreds({
+      ...creds,
+      [name]: value,
+    });
+  }
+  const onsubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(signup(creds));
+    console.log(token);
+    toast({
+      title: "Account created.",
+      position: "top",
+      status: "success",
+
+      isClosable: true,
+    });
+    navigate("/login")
+
+  };
 
   return (
     <Flex
@@ -49,30 +81,49 @@ export default function Onbording() {
               <FormControl id="firstName" isRequired>
                 <FormLabel>Full Name</FormLabel>
 
-                <Input type="text" placeholder=" Type Full Name" />
+                <Input
+                  type="text"
+                  placeholder=" Type Full Name"
+                  name="username"
+                  onChange={onchange}
+                />
               </FormControl>
             </Box>
             <Box>
               <FormControl id="firstName" isRequired>
                 <FormLabel>Role</FormLabel>
 
-                <Input type="text"  placeholder="e.g:client ,employee/ admin"/>
+                <Input
+                  type="text"
+                  placeholder="e.g:client ,employee/ admin"
+                  name="role"
+                  onChange={onchange}
+                />
               </FormControl>
             </Box>
             <Box></Box>
 
             <FormControl id="email" isRequired>
               <FormLabel>Confirm Email address</FormLabel>
-              <Input type="email"  placeholder="e.g:alisha@gmail.com"/>
+              <Input
+                type="email"
+                placeholder="Confirm your Email address.."
+                name="email"
+                onChange={onchange}
+              />
             </FormControl>
             <FormControl id="email">
               <FormLabel>Phone number</FormLabel>
-              <Input type="number" />
+              <Input type="number" placeholder="Enter your Phone number" />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? "text" : "password"} />
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  onChange={onchange}
+                />
                 <InputRightElement h={"full"}>
                   <Button
                     mt={"-10px"}
@@ -89,28 +140,33 @@ export default function Onbording() {
             <Stack spacing={10} pt={2}>
               <Stack pt={6}>
                 <Checkbox>
-                  I have read and agree the Terms and Privacy Policy
+                  I have read and agree the{" "}
+                  <Text as={"span"} color={"#38bdf8  "} fontSize={"sm"}>
+                    Terms
+                  </Text>{" "}
+                  and{" "}
+                  <Text as={"span"} color={"#38bdf8  "} fontSize={"sm"}>
+                    Privacy Policy
+                  </Text>
                 </Checkbox>
               </Stack>
-
-              <Button
-                loadingText="Submitting"
-                size="lg"
-                bg={"#4ade80  "}
-                color={"white"}
-                _hover={{
-                  bg: "#22c55e ",
-                }}
-                onClick={()=>toast({
-                  title: 'Account created.',
-                  position:"top",
-                  status: 'success',
-                  duration: 9000,
-                  isClosable: true,
-                })}
-              >
-                Sign up
-              </Button>
+              <FormControl >
+                <Center>
+                  <Button
+                    type="submit"
+                    loadingText="Submitting"
+                    size="lg"
+                    bg={"#4ade80  "}
+                    color={"white"}
+                    _hover={{
+                      bg: "#22c55e ",
+                    }}
+                    onClick={onsubmit}
+                  >
+                    Sign up
+                  </Button>
+                </Center>
+              </FormControl>
             </Stack>
           </Stack>
         </Box>
