@@ -1,7 +1,7 @@
 import { Box, Text } from '@chakra-ui/react'
 import React from 'react'
 
-const Home = () => {
+const DashboardHome = () => {
   return (
     <>
       
@@ -18,4 +18,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default DashboardHome

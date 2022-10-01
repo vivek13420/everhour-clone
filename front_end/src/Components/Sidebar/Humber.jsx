@@ -29,7 +29,8 @@ import { AiOutlineSetting } from "react-icons/ai"
 import {FcBusinessman} from "react-icons/fc"
 import {ImProfile} from "react-icons/im"
 import everhour from "./images/everhour.png"
-
+import { useDispatch } from 'react-redux'
+import {logout} from "../../Store/auth.action.type"
 
 
 
@@ -37,7 +38,12 @@ import everhour from "./images/everhour.png"
 export default function Humber() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
+    const dispatch = useDispatch()
 
+async function handleLogout(){
+let res= await dispatch(logout())
+
+}
     return (
         <>
         <Flex justifyContent='space-between' >
@@ -70,18 +76,16 @@ export default function Humber() {
                 <DrawerContent>
                     <DrawerCloseButton />
                     <DrawerHeader  textDecoration='underline'>
-                        <Flex gap={2}>
+                        <Flex >
                             <span>
-                                <Text color={'teal'}>WEB</Text>
+                                <Text color={'#22c55e  '}>EVER</Text>
                             </span>
 
                             <Flex>
                                 <span>
-                                    <Text color={'yellow'}>DEV</Text>
+                                    <Text color={'#84cc16 '}>HOUR</Text>
                                 </span>
-                                <span>
-                                    <Text color={'blue'}>ELOPER</Text>
-                                </span>
+                                
                             </Flex>
                         </Flex>
                     </DrawerHeader>
@@ -95,7 +99,7 @@ export default function Humber() {
                             <Box ><Text  cursor='pointer' fontSize={'large'} fontWeight='semibold' mt={4}  textColor={'teal'}  ><NavLink onClick={onClose} to='contact' spy={true} smooth={true}>Reports</NavLink></Text></Box> */}
 <Box width="100%" >
                 <Flex gap={10}>
-                    <NavLink to='/'  >
+                    <NavLink to='/dashboard'  >
                         <Flex gap={3} mb="1.5em" alignItems="center" >
                             <Image src={everhour} w='25px' onClick={onClose} />
                             <Text    onClick={onClose}   color="#57534e " fontWeight={"semibold"} fontSize='sm' textDecoration='underline' >Everhour</Text>
@@ -105,63 +109,63 @@ export default function Humber() {
                     {/* <FcMenu  color='#57534e ' fontSize="25px" /> */}
 
                 </Flex>
-                <NavLink to="/">
+                <NavLink to="/dashboard">
                     <Flex gap={3} mb="1.5em" alignItems="center"  _hover={{bg:"#ccfbf1 "}}  >
                         <HiOutlineHome opacity={0.8} color='#57534e ' fontSize="25px"   onClick={onClose}   />
                         <Text color="#57534e " fontWeight={"semibold"} fontSize='sm'   onClick={onClose}   >Home</Text>
                     </Flex>
                 </NavLink>
-                <NavLink to="/time">
+                <NavLink to="/dashboard/time">
                     <Flex gap={3} mb="1.5em" alignItems="center"   _hover={{bg:"#ccfbf1 "}}>
                         <BsClock color='#57534e ' opacity={0.8} fontSize="23px"   onClick={onClose}   />
                         <Text color="#57534e " fontWeight={"semibold"} fontSize='sm'    onClick={onClose}  >Time</Text>
                     </Flex>
                 </NavLink>
-                <NavLink to='/project' >
+                <NavLink to='/dashboard/project' >
                     <Flex gap={3} mb="1.5em" alignItems="center"   _hover={{bg:"#ccfbf1 "}} >
                         <BiBusSchool fontSize="23px" opacity={0.8} color='#57534e'   onClick={onClose}   />
                         <Text color="#57534e " fontWeight={"semibold"} fontSize='sm'    onClick={onClose}  >Projects</Text>
                     </Flex>
                 </NavLink>
-                <NavLink to='/client'>
+                <NavLink to='/dashboard/client'>
                     <Flex gap={3} mb="1.5em" alignItems="center"   _hover={{bg:"#ccfbf1 "}} >
                         <MdOutlinePersonPin fontSize="23px" color='#57534e' opacity={0.8}   onClick={onClose}   />
                         <Text color="#57534e " fontWeight={"semibold"} fontSize='sm'    onClick={onClose}  >Clients</Text>
                     </Flex>
                 </NavLink>
-                <NavLink to="team">
+                <NavLink to="/dashboard/team">
                     <Flex gap={3} mb="1.5em" alignItems="center"   _hover={{bg:"#ccfbf1 "}} >
                         <TbUsers fontSize="23px" color='#57534e' opacity={0.8}   onClick={onClose}   />
                         <Text color="#57534e " fontWeight={"semibold"} fontSize='sm'   onClick={onClose}   >Team</Text>
                     </Flex>
                 </NavLink>
-                <NavLink to="report" >
+                <NavLink to="/dashboard/report" >
                     <Flex gap={3} mb="1.5em" alignItems="center"   _hover={{bg:"#ccfbf1 "}} >
                         <FiPieChart fontSize="23px" color='#57534e' opacity={0.8}    onClick={onClose}  />
                         <Text color="#57534e " fontWeight={"semibold"} fontSize='sm'   onClick={onClose}   >Reports</Text>
                     </Flex>
                 </NavLink>
                 <Box border={'0.5px solid pink'} mb="1em" ></Box>
-                <NavLink to="/setting" >
+                <NavLink to="/dashboard/setting" >
                     <Flex gap={3} mb="1em" alignItems="center"   _hover={{bg:"#ccfbf1 "}} >
                         <AiOutlineSetting fontSize="23px" color='#57534e' opacity={0.8}   onClick={onClose}   />
-                        <Text color="#57534e " fontWeight={"semibold"} fontSize='sm'    onClick={onClose}  >Settings</Text>
+                        <Text color="#57534e " fontWeight={"semibold"} fontSize='sm'  onClick={onClose}  >Settings</Text>
                     </Flex>
                 </NavLink>
 
                 <Box border={'0.5px solid pink'} mb="1em" ></Box>
 
-                <NavLink to="/profile" >
+                <NavLink to="/dashboard/profile" >
                     <Flex gap={3} mb="1.5em" alignItems="center"   _hover={{bg:"#ccfbf1 "}} >
                         <ImProfile fontSize="23px" color='#57534e' opacity={0.8}    onClick={onClose}  />
                         <Text color="#57534e " fontWeight={"semibold"} fontSize='sm'    onClick={onClose}  >My Profile</Text>
                     </Flex>
                 </NavLink>
 
-                <NavLink to="/signout" >
+                <NavLink to="/dashboard/signout" >
                     <Flex gap={3} mb="2em" alignItems="center"   _hover={{bg:"#ccfbf1 "}} >
                         <IoLogOutOutline fontSize="23px" color='#57534e' opacity={0.8}   onClick={onClose}   />
-                        <Text color="#57534e " fontWeight={"semibold"} fontSize='sm'    onClick={onClose}  >Sign Out</Text>
+                        <Text  color="#57534e " fontWeight={"semibold"} fontSize='sm'    onClick={()=>{onClose(); handleLogout()}}  >Sign Out</Text>
                     </Flex>
                 </NavLink>
 
@@ -178,25 +182,6 @@ export default function Humber() {
                        
                     </DrawerBody>
 
-                    {/* <DrawerFooter>
-                    <Flex columnGap={11} justifyContent="space-around">
-                            <Link to='contact' spy={true} smooth={true}>
-                            <Button _focus={{outline:"none"}} onClick={onClose} size={'lg'} bgColor="teal" color={'white'}>Hire me</Button>
-                            </Link>
-                            <a href="mailto:pravhatray@gmail.com">
-
-                            <IconButton size='lg' colorScheme='teal' _focus={{ outline: "none" }} icon={<EmailIcon color='white ' />} />
-
-                            </a>
-
-                            
-                            <a href='https://github.com/pravhatray'  target="_blank">
-                                <IconButton size='lg' colorScheme='teal' _focus={{outline:"none"}} icon={<FaGithub />} />
-                            </a>
-
-                            <a href='https://www.linkedin.com/in/pravhat-ray-842851236/'  target="_blank"><IconButton size='lg' _focus={{outline:"none"}} colorScheme='teal' icon={<FaLinkedin />} /></a>
-                            </Flex>
-                    </DrawerFooter> */}
                 </DrawerContent>
             </Drawer>
         </>
