@@ -11,6 +11,9 @@ import Projects from '../Components/Projects/Projects'
 import DashboardHome from '../Components/Home/Home'
 import Home from "../Pages/Home/Home"
 import UserProfileEdit from '../Pages/ProfileEdit'
+import HoursPage from '../Components/Calender/HoursPage'
+
+
 
 
 import Pricing from '../Pages/Pricing/Pricing'
@@ -33,7 +36,7 @@ const Allroutes = () => {
           </Privateroute> }>
          
             <Route  index element={<DashboardHome />} />
-            <Route path="/dashboard/time" element={<h1>time</h1>} />
+            <Route path="/dashboard/time" element={<HoursPage/>} />
             <Route path="/dashboard/project" element={<Projects />} />
             <Route path="/dashboard/client" element={<h1>Clients</h1>} />
             <Route path="/dashboard/team" element={<h1>team</h1>} />
