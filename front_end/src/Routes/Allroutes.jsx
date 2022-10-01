@@ -12,10 +12,6 @@ import DashboardHome from '../Components/Home/Home'
 import Home from "../Pages/Home/Home"
 import UserProfileEdit from '../Pages/ProfileEdit'
 import HoursPage from '../Components/Calender/HoursPage'
-
-
-
-
 import Pricing from '../Pages/Pricing/Pricing'
 import DemoPage from '../Pages/DemoPageFolder/DemoPage'
 
