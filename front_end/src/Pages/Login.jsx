@@ -65,10 +65,13 @@ export default function Login() {
         title: "Successfully Logged In",
         status: "success",
         position: "top",
-
+        duration:1000,
         isClosable: true,
       });
-      navigate("/dashboard");
+      setTimeout(()=>{
+ navigate("/dashboard");
+      },1000)
+     
     }
   
   }, [token]);
