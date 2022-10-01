@@ -22,11 +22,16 @@ import { ImQuotesRight } from "react-icons/im";
 import { BsFillCircleFill } from "react-icons/bs";
 
 import "./Home.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import g_image from "../../Assets/google-image.png";
 import FirstCarousel from "./FirstCarousel";
 import SecondCarousel from "./SecondCarousel";
+import Footer from "../../Components/Footer/Footer";
+import SmallFooter from "../../Components/Footer/SmallFooter";
+import { useNavigate } from "react-router-dom";
+
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <VStack>
       <Navbar />
@@ -56,14 +61,9 @@ const Home = () => {
           </Text>
         </Flex>
         <Box textAlign="center" gap={10} display={["block", "flex"]}>
-          <Input
-            focusBorderColor="lime"
-            htmlSize={40}
-            size="lg"
-            placeholder="Work email"
-          />
-
           <Button
+            onClick={() => navigate("/signup")}
+            px="130px"
             mt={["10px", "0px", "0px"]}
             width={["100%", "40%"]}
             size="lg"
@@ -71,19 +71,6 @@ const Home = () => {
           >
             Try Free
           </Button>
-        </Box>
-        <Box>
-          <Link>
-            <HStack>
-              <Image
-                display="inline-block"
-                boxSize="30px"
-                objectFit="cover"
-                src={g_image}
-              />
-              <Text>Or sign up with Google Account</Text>
-            </HStack>
-          </Link>
         </Box>
       </VStack>
       <FirstCarousel />
@@ -116,9 +103,10 @@ const Home = () => {
                   allows me to extract the data I need. Everhour is a great tool
                   for our time tracking needs!
                   <br />
-                  Kelly Bonneau, CPA
                   <br />
-                  Accounting Manager at 7shifts
+                  <Text fontWeight="bold" >Kelly Bonneau, CPA</Text>
+                  
+                  <Text>Accounting Manager at 7shifts</Text>
                 </Text>
               </Flex>
             </VStack>
@@ -163,7 +151,7 @@ const Home = () => {
         </Box>
       </Show>
 
-      <Box pt="60px" width="100%">
+      <Box pb="30px" pt="60px" width="100%">
         <HStack gap="150px" px="10%">
           <VStack alignItems="flex-start" maxW={["90%", "90%", "60%"]}>
             <Text
@@ -183,14 +171,9 @@ const Home = () => {
               gap={5}
               display={["block", "flex"]}
             >
-              <Input
-                focusBorderColor="lime"
-                htmlSize={30}
-                size="md"
-                placeholder="Work email"
-              />
-
               <Button
+                onClick={() => navigate("/signup")}
+                px="130px"
                 mt={["10px", "0px", "0px"]}
                 width={["100%", "40%"]}
                 size="md"
@@ -198,19 +181,6 @@ const Home = () => {
               >
                 Try Free
               </Button>
-            </Box>
-            <Box>
-              <Link>
-                <HStack>
-                  <Image
-                    display="inline-block"
-                    boxSize="30px"
-                    objectFit="cover"
-                    src={g_image}
-                  />
-                  <Text>Or sign up with Google Account</Text>
-                </HStack>
-              </Link>
             </Box>
           </VStack>
 
@@ -262,6 +232,14 @@ const Home = () => {
           </Hide>
         </HStack>
       </Box>
+
+      <Hide below="md">
+        <Footer />
+      </Hide>
+
+      <Show below="md">
+        <SmallFooter />
+      </Show>
     </VStack>
   );
 };

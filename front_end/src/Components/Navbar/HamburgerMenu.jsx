@@ -25,12 +25,13 @@ import {
 import style from "./Navbar.module.css";
 
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const HamburgerMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
   return (
     <>
       <IconButton
@@ -135,14 +136,28 @@ const HamburgerMenu = () => {
                 </AccordionItem>
               </Accordion>
               <Link to="/pricing">
-                <Text pl={4} fontSize="lg">Pricing</Text>
+                <Text pl={4} fontSize="lg">
+                  Pricing
+                </Text>
               </Link>
-              <Divider  size="lg" fontWeight="lg" />
-              
+              <Divider size="lg" fontWeight="lg" />
+
               <Link to="/demo">
-                <Text  pl={4} fontSize="lg">Demo</Text>
+                <Text pl={4} fontSize="lg">
+                  Demo
+                </Text>
               </Link>
-              <Divider/>
+              <Divider />
+              <Flex justifyContent="center" >
+                <Button onClick={()=>navigate('/login')} colorScheme="green" width={["100%","60%","50%"]} size="lg">
+                  LogIn
+                </Button>
+              </Flex>
+              <Flex justifyContent="center" >
+                <Button variant='outline' onClick={()=>navigate('/login')} colorScheme="green" width={["100%","60%","50%"]} size="lg">
+                  Get Started
+                </Button>
+              </Flex>
             </VStack>
           </DrawerBody>
         </DrawerContent>
