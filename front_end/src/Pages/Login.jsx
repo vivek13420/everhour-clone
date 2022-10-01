@@ -22,8 +22,9 @@ import Navbar from "../Components/Navbar/Navbar";
 import { login } from "../Store/auth.action.type";
 
 export default function Login() {
-  const[notauth,setnotauth]=useState(true)
+  // const[notauth,setnotauth]=useState(true)
   let token = useSelector((store) => store.auth.token);
+  let error = useSelector((store)=> store.auth.error)
   let [email, password] = token.split(":");
   console.log(email, password, "fgsd");
 
@@ -71,6 +72,16 @@ export default function Login() {
     }
   
   }, [token]);
+  useEffect(()=>{
+   if(error){
+    toast({
+      title: "Email/Password Wrong",
+      status: "error",
+      position: "top",
+      isClosable: true,
+    });
+   }
+  }, [error])
 
   return (
     <Box>
