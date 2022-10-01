@@ -11,6 +11,8 @@ import Projects from '../Components/Projects/Projects'
 import DashboardHome from '../Components/Home/Home'
 import Home from "../Pages/Home/Home"
 import UserProfileEdit from '../Pages/ProfileEdit'
+import Pricing from '../Pages/Pricing/Pricing'
+import DemoPage from '../Pages/DemoPageFolder/DemoPage'
 
 const Allroutes = () => {
   return (
@@ -18,8 +20,8 @@ const Allroutes = () => {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/pricing" element={"pricing"} />
-        <Route path="/demo" element={"demo"} />
+        <Route path="/pricing" element={<Pricing/>} />
+        <Route path="/demo" element={<DemoPage/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/onboarding" element={<Onbording />} />
