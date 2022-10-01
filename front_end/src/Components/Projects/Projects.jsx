@@ -26,6 +26,7 @@ import axios from "axios"
 import { useState } from 'react'
 import { useEffect } from 'react'
 import ProjectList from './ProjectList'
+import { useSearchParams } from 'react-router-dom'
 
 
 const getproject=async()=>{
@@ -57,7 +58,37 @@ const Projects = () => {
   const finalRef = React.useRef(null)
 const [prodata,setProData]=useState([])
 const [title,setTitle]=useState()
-// const [userId,setUserId]=useState("")
+const [searchParam,setSearchParam]=useSearchParams()
+const [query,setQuery]=useState(searchParam.get("q") || "")
+const [searchedData,setSearchedData]=useState([])
+
+
+
+const search=(query)=>{
+  axios.get(`https://cloneofeverhour.herokuapp.com/projects/63356e456e29a1d70aab7c3b?q=${query}`)
+    .then((res)=>{
+      console.log(res)
+      setSearchedData(res)
+    })
+
+}
+
+
+const handleQuery=(e)=>{
+
+  setTimeout(() => {
+      setQuery(e.target.value)
+      
+  }, 1000);
+}
+
+function handlesearch(){
+  search(query)
+}
+
+useEffect(()=>{
+  setSearchParam({q:query})
+},[query])
 
 
   const projectdata=()=>{
@@ -143,6 +174,7 @@ if(res.status===200)
                 <ModalContent>
                   <ModalHeader>Create Project</ModalHeader>
                   <ModalCloseButton />
+
                   <form onSubmit={handleSubmit}>
 
                     <ModalBody pb={6}>
@@ -202,8 +234,9 @@ if(res.status===200)
             </Menu>
           </Box>
 
-          <Box>
-            <Input type='text' variant='filled' placeholder='Search Projects...' />
+          <Box display='flex'>
+            <Input type='text' onChange={handleQuery} variant='filled' placeholder='Search Projects...' />
+            <Button onClick={handlesearch}>Submit</Button>
           </Box>
 
         </Flex>
@@ -228,28 +261,6 @@ if(res.status===200)
 
 export default Projects
 
-// 0
-// : 
-// hasBudget
-// : 
-// true
-// isActive
-// : 
-// true
-// projectAdmin
-// : 
-// "6336b15125199c0f7afa62fb"
-// teamMembers
-// : 
-// []
-// title
-// : 
-// "project_10"
-// __v
-// : 
-// 0
-// _id
-// : 
-// "6336b19425199c0f7afa6300"
+
 
 
