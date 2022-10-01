@@ -29,8 +29,9 @@ export const Shared = () => {
           </Box>
         </Hide>
       </Flex>
+
       <Show below='md'>
-        <Box border="2px solid red"  width={'100%'}>
+        <Box width={'100%'}>
         <Outlet />
         </Box>
 </Show>

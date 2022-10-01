@@ -23,7 +23,6 @@ const Sidebar = () => {
 async function handleLogout(){
 let res= await dispatch(logout())
 
-console.log("take me out");
 }
 
 
