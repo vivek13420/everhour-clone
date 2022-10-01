@@ -24,7 +24,7 @@ export default function FirstCarousel() {
   const [active, setActive] = useState(1);
   return (
     <>
-      <VStack justifyItems="center" display={active === 1 ? "block" : "none"}>
+      <VStack px="20px" justifyItems="center" display={active === 1 ? "block" : "none"}>
         <Box
           ml={["0px", "0px", "250px"]}
           alignItems="center"
@@ -39,7 +39,7 @@ export default function FirstCarousel() {
           and breaks for each employee
         </Text>
       </VStack>
-      <VStack justifyItems="center" display={active === 2 ? "block" : "none"}>
+      <VStack px="20px" justifyItems="center" display={active === 2 ? "block" : "none"}>
         <Box
           ml={["0px", "0px", "250px"]}
           alignItems="center"
@@ -54,7 +54,7 @@ export default function FirstCarousel() {
           real time. Receive timely notifications
         </Text>
       </VStack>
-      <VStack justifyItems="center" display={active === 3 ? "block" : "none"}>
+      <VStack px="20px" justifyItems="center" display={active === 3 ? "block" : "none"}>
         <Box
           ml={["0px", "0px", "250px"]}
           alignItems="center"
@@ -69,7 +69,7 @@ export default function FirstCarousel() {
           everyone in the loop and on track
         </Text>
       </VStack>
-      <VStack justifyItems="center" display={active === 4 ? "block" : "none"}>
+      <VStack px="20px" justifyItems="center" display={active === 4 ? "block" : "none"}>
         <Box
           ml={["0px", "0px", "250px"]}
           alignItems="center"
@@ -84,7 +84,7 @@ export default function FirstCarousel() {
           compare plan to the actual time spent
         </Text>
       </VStack>
-      <VStack justifyItems="center" display={active === 5 ? "block" : "none"}>
+      <VStack px="20px" justifyItems="center" display={active === 5 ? "block" : "none"}>
         <Box
           ml={["0px", "0px", "250px"]}
           alignItems="center"
@@ -99,7 +99,7 @@ export default function FirstCarousel() {
           budgets, add to client invoices
         </Text>
       </VStack>
-      <VStack justifyItems="center" display={active === 6 ? "block" : "none"}>
+      <VStack px="20px" justifyItems="center" display={active === 6 ? "block" : "none"}>
         <Box
           ml={["0px", "0px", "250px"]}
           alignItems="center"

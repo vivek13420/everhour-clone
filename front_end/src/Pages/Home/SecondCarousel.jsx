@@ -132,30 +132,30 @@ const SecondCarousel = () => {
         <Hide breakpoint='(max-width: 950px)'>
       <HStack justifyItems="center" alignItems="center" gap={["10px","20px","40px"]} px="150px">
         <Flex gap={["5px","10px","30px"]}>
-          <Text>1</Text>
+          <Text fontSize="x-large" color= "rgb(87,187,113)" >1</Text>
           <VStack alignItems="flex-start">
-            <Text>Quick Setup</Text>
-            <Text>
+            <Text fontWeight="bold" >Quick Setup</Text>
+            <Text color= "rgb(150,153,147)" >
               Connect Everhour with your tool and start tracking time right
               away. No manual project setup required.
             </Text>
           </VStack>
         </Flex>
         <Flex gap="30px">
-          <Text>2</Text>
+          <Text fontSize="x-large" color= "rgb(87,187,113)" >2</Text>
           <VStack alignItems="flex-start">
-            <Text>Native integration</Text>
-            <Text>
+            <Text fontWeight="bold">Native integration</Text>
+            <Text color= "rgb(150,153,147)">
               Time tracking controls natively appears inside your project
               management tool, making it easy to track time.
             </Text>
           </VStack>
         </Flex>
         <Flex gap="30px">
-          <Text>3</Text>
+          <Text fontSize="x-large" color= "rgb(87,187,113)">3</Text>
           <VStack alignItems="flex-start">
-            <Text>Automatic updates</Text>
-            <Text>
+            <Text fontWeight="bold">Automatic updates</Text>
+            <Text color= "rgb(150,153,147)">
               Everhour syncs changes automatically. That means your reports will
               always show the freshest data.
             </Text>
