@@ -4,6 +4,7 @@ import Home from '../Pages/Home/Home'
 import Createteam from '../Pages/Createteamform'
 import Onbording from '../Pages/Onbording'
 import Signup from '../Pages/Signup'
+import Pricing from '../Pages/Pricing/Pricing'
 
 const Allroutes = () => {
   return (
@@ -11,7 +12,7 @@ const Allroutes = () => {
         
           <Routes>
               <Route path="/" element={<Home/>} />
-              <Route path="/pricing" element={"pricing"} />
+              <Route path="/pricing" element={<Pricing/>} />
               <Route path="/demo" element={"demo"} />
               <Route path="login" element={"login"} />
               <Route path="/signup" element={<Signup />} />

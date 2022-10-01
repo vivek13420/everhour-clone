@@ -42,13 +42,13 @@ const Navbar = () => {
 
       // position="sticky"
       top="-18px"
-
+      // border="1px solid black"
      
 
       className={style.main}
     >
       <HStack
-        px="14"
+        px={["4","8","14"]}
         py={18}
         boxShadow="md"
         rounded="md"
@@ -180,7 +180,7 @@ const Navbar = () => {
             </Button>
             </Link>
         </Flex>
-        <HamburgerMenu/>
+        <HamburgerMenu pr="-50px"/>
       </HStack>
     </Box>
   );
