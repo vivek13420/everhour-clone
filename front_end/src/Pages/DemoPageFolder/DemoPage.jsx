@@ -2,7 +2,7 @@ import React from 'react'
 
 const DemoPage = () => {
   return (
-    <div>DemoPage</div>
+    <div>DemoPage is under construction</div>
   )
 }
 
