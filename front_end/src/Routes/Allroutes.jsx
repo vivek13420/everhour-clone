@@ -9,6 +9,7 @@ import Projects from '../Components/Projects/Projects'
 import DashboardHome from '../Components/Home/Home'
 import Home from "../Pages/Home/Home"
 import UserProfileEdit from '../Pages/ProfileEdit'
+import Clients from '../Pages/Clients'
 
 const Allroutes = () => {
   return (
@@ -28,7 +29,7 @@ const Allroutes = () => {
             <Route  index element={<DashboardHome />} />
             <Route path="/dashboard/time" element={<h1>time</h1>} />
             <Route path="/dashboard/project" element={<Projects />} />
-            <Route path="/dashboard/client" element={<h1>client</h1>} />
+            <Route path="/dashboard/client" element={<Clients/>} />
             <Route path="/dashboard/team" element={<h1>team</h1>} />
             <Route path="/dashboard/report" element={<h1>report</h1>} />
             <Route path="/dashboard/setting" element={<h1>setting</h1>} />

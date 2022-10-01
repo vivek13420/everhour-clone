@@ -20,7 +20,7 @@ import {
   DrawerBody,
 } from "@chakra-ui/react";
 import style from "./Navbar.module.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
   Menu,
   MenuButton,
@@ -32,19 +32,23 @@ import {
   MenuDivider,
 } from "@chakra-ui/react";
 import HamburgerMenu from "./HamburgerMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../Store/auth.action.type";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  let token = useSelector(store => store.auth.token);
+  let name = useSelector(store => store.auth.name);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <Box
       pt={2}
-
       // position="sticky"
       top="-18px"
-
-     
-
       className={style.main}
     >
       <HStack
@@ -165,27 +169,54 @@ const Navbar = () => {
             Demo
           </Link>
           <Spacer />
-          <Link to="/login" className={style.text}>
-            Login
-          </Link>
-          <Link to="/signup">
-          <Button
-            variant={"solid"}
-            size="md"
-            colorScheme={"green"}
-            ml="-15px"
-            // mt="0px"
-          >
-            Signup
-            </Button>
+          {!token && (
+            <Link to="/login" className={style.text}>
+              Login
             </Link>
+          )}
+          {!token && (
+            <Link to="/signup">
+              <Button
+                variant={"solid"}
+                size="md"
+                colorScheme={"green"}
+                ml="-15px"
+                // mt="0px"
+              >
+                Signup
+              </Button>
+            </Link>
+          )}
+          {token && <p className={style.text}>{`Welcome ${name}`}</p>}
+          {token && (
+            <Button
+              variant={"solid"}
+              size="md"
+              colorScheme={"green"}
+              ml="-15px"
+              onClick={()=> navigate('/dashboard')}
+              // mt="0px"
+            >
+              Dashboard
+            </Button>
+          )}
+          {token && (
+            <Button
+              variant={"solid"}
+              size="md"
+              colorScheme={"green"}
+              ml="-15px"
+              onClick={handleLogout}
+              // mt="0px"
+            >
+              Logout
+            </Button>
+          )}
         </Flex>
-        <HamburgerMenu/>
+        <HamburgerMenu />
       </HStack>
     </Box>
   );
 };
-
-
 
 export default Navbar;

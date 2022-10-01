@@ -5,7 +5,9 @@ import {
     LOGOUT_GET,
   } from "./auth.types";
   let token = localStorage.getItem("token") || "";
+  let name = localStorage.getItem("name")   || "";
   let initialstate = {
+    name,
     loading: false,
     error: false,
     token,
@@ -22,6 +24,7 @@ import {
       case LOGIN_GET_SUCCESS: {
         if (payload.token) {
           localStorage.setItem("token", payload.token);
+          localStorage.setItem("name", payload.name);
         }
   
         return {
@@ -29,6 +32,7 @@ import {
           loading: false,
           error: false,
           token: payload.token,
+          name: payload.name
         };
       }
       case LOGIN_GET_ERROR: {
