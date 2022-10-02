@@ -19,7 +19,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
-import { useAuth } from "../context/AuthContext";
+
 import { login } from "../Store/auth.action.type";
 
 export default function Login() {

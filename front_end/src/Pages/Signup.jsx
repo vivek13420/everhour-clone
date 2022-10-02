@@ -16,7 +16,7 @@ import Griddrop from "./Review";
 import { useAuth } from "../context/AuthContext.js";
 
 const Signup = () => {
-  const { SigninwithGoogle } = useAuth();
+  
   
   return (
     <Box>
@@ -54,11 +54,7 @@ const Signup = () => {
               variant={"outline"}
               borderColor={"#a8a29e "}
               leftIcon={<FcGoogle />}
-              onClick={() =>
-                SigninwithGoogle()
-                  .then((user) => { console.log(user) })
-                  .catch((e) => console.log(e))
-              }
+             
             >
               <Center>
                 <Text>Sign in with Google</Text>
