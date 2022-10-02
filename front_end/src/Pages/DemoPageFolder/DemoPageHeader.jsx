@@ -12,7 +12,7 @@ import rocketImg from "../../Assets/rocket.png";
 
 const DemoPageHeader = () => {
   return (
-    <VStack pb="20%" pt="65px" width="100%" textAlign="center">
+    <VStack pb="8%" pt="65px" width="100%" textAlign="center">
       <Flex pb="15px" justifyContent="center">
         <Text fontWeight={["bold"]} fontSize={["25px", "30px", "45px"]}>
           Book a 30-min live demo
