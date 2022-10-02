@@ -14,9 +14,53 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { update } from "../Store/auth.action.type";
+import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function UserProfileEdit() {
+  let token = useSelector((store) => store.auth.token);
+  // let name = useSelector((store) => store.auth.name);
+
+  // console.log(name)
+  let dispatch = useDispatch();
+  const [id, email, password] = token.split(":");
+  const [profileName,setName]=useState(localStorage.getItem("name")||"")
+  const [cred, setcred] = useState({});
   const toast = useToast();
+  const navigate=useNavigate()
+
+  function onchange(e) {
+    const { name, value } = e.target;
+    setcred({
+      ...cred,
+      [name]: value,
+    });
+  }
+
+  
+  
+
+  function onsubmit(e) {
+    e.preventDefault();
+   dispatch(update(id,cred))
+    // localStorage.setItem("name", cred.username)
+    // setName( cred.username)
+    //  update(cred)
+    // console.log(cred,name)
+    toast({
+      title: "Saved successfully",
+      position: "top",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+  
+  }
+
+
   return (
     <Flex
       minH={"100vh"}
@@ -34,11 +78,14 @@ export default function UserProfileEdit() {
         p={6}
         my={12}
       >
-        <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
+        <Heading
+          lineHeight={1.1}
+          color={"#57534e "}
+          fontSize={{ base: "2xl", sm: "3xl" }}
+        >
           MY Profile
         </Heading>
         <FormControl id="userName">
-         
           <Stack direction={["column", "row"]} spacing={6}>
             <Center>
               <Avatar size="xl" src="">
@@ -64,6 +111,8 @@ export default function UserProfileEdit() {
             placeholder="UserName"
             _placeholder={{ color: "gray.500" }}
             type="text"
+            name="username"
+            onChange={onchange}
           />
         </FormControl>
         <FormControl id="email" isRequired>
@@ -72,6 +121,8 @@ export default function UserProfileEdit() {
             placeholder="your-email@example.com"
             _placeholder={{ color: "gray.500" }}
             type="email"
+            name="email"
+            onChange={onchange}
           />
         </FormControl>
         <FormControl id="password" isRequired>
@@ -80,14 +131,18 @@ export default function UserProfileEdit() {
             placeholder="password"
             _placeholder={{ color: "gray.500" }}
             type="password"
+            name="password"
+            onChange={onchange}
           />
         </FormControl>
-        <FormControl  isRequired>
+        <FormControl isRequired>
           <FormLabel>Role</FormLabel>
           <Input
             placeholder="Role"
             _placeholder={{ color: "gray.500" }}
             type="text"
+            name="role"
+            onChange={onchange}
           />
         </FormControl>
         <Stack spacing={6} direction={["column", "row"]}>
@@ -108,14 +163,8 @@ export default function UserProfileEdit() {
             _hover={{
               bg: "#22c55e",
             }}
-          onClick={()=> toast({
-              title: 'Saved successfully',
-             position:'top',
-              status: 'success',
-              duration: 9000,
-              isClosable: true,
-            })
-          }
+            type="submit"
+            onClick={onsubmit}
           >
             Save changes
           </Button>

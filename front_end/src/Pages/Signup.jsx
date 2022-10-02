@@ -13,11 +13,15 @@ import { FcGoogle } from "react-icons/fc";
 import Navbar from "../Components/Navbar/Navbar";
 
 import Griddrop from "./Review";
+import { useAuth } from "../context/AuthContext.js";
 
 const Signup = () => {
+  const { SigninwithGoogle } = useAuth();
+  
   return (
     <Box>
       <Navbar />
+
       <Stack
         as={Box}
         textAlign={"center"}
@@ -50,19 +54,21 @@ const Signup = () => {
               variant={"outline"}
               borderColor={"#a8a29e "}
               leftIcon={<FcGoogle />}
+              onClick={() =>
+                SigninwithGoogle()
+                  .then((user) => { console.log(user) })
+                  .catch((e) => console.log(e))
+              }
             >
               <Center>
                 <Text>Sign in with Google</Text>
               </Center>
             </Button>
           </Center>
-          <Text color={"#a8a29e "} mt={"-60%"}>or</Text>
-          <Input
-            size={["sm", "md", "md", "lg"]}
-            w="290px"
-            placeholder={"Work Email..."}
-            borderColor="#a8a29e "
-          />
+          <Text color={"#a8a29e "} mt={"-60%"}>
+            or
+          </Text>
+
           <Link to="/onboarding">
             <Button
               colorScheme={"#4ade80 "}
@@ -86,6 +92,7 @@ const Signup = () => {
         <Button
           colorScheme={"white"}
           size={"sm"}
+          mt={"3%"}
           color="#4ade80  "
           border={"1px solid #4ade80  "}
           _hover={{ color: "white", bg: "#4ade80  " }}

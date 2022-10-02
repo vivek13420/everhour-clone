@@ -1,5 +1,5 @@
 
-import { SIGNUP_ERROR, SIGNUP_LOADING, SIGNUP_SUCCESS } from "./signup.types";
+import { SIGNUP_ERROR, SIGNUP_LOADING, SIGNUP_SUCCESS, SIGNUP_UPDATE } from "./signup.types";
   let token = localStorage.getItem("token") || "";
   let initialstate = {
     loading: false,
@@ -27,6 +27,7 @@ import { SIGNUP_ERROR, SIGNUP_LOADING, SIGNUP_SUCCESS } from "./signup.types";
           token: payload.token,
         };
       }
+   
       case SIGNUP_ERROR: {
         return {
           ...state,
