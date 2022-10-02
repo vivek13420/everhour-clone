@@ -17,16 +17,14 @@ import {
 import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
 import { useAuth } from "../context/AuthContext";
 import { login } from "../Store/auth.action.type";
 
 export default function Login() {
-  const [notauth, setnotauth] = useState(true);
-  let token = useSelector((store) => store.auth.token);
-  let [email, password] = token.split(":");
-  console.log(email, password, "fgsd");
+  let token = useSelector(store => store.auth.token);
+  let auth = useSelector(store => store.auth);
   const { SigninwithGoogle } = useAuth();
 
   const toast = useToast();
@@ -34,46 +32,63 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onchange = (e) => {
+  const onchange = e => {
     const { name, value } = e.target;
     setlogincred({
       ...logincred,
       [name]: value,
     });
   };
-  const onsubmit = async (e) => {
+  const onsubmit = e => {
     e.preventDefault();
-    console.log(logincred);
-    let res = await dispatch(login(logincred));
-    console.log("token", token);
-    console.log(" ssecond hahz");
-    // if (!token) {
-    //   toast({
-    //     title: "Invalid password/Email",
-    //     status: "error",
-    //     position: "top",
-
-    //     isClosable: true,
-    //   });
-    // }
-
-    console.log(token);
-    console.log(email, password);
+    // console.log(logincred);
+    dispatch(login(logincred));
   };
+
+
+
   useEffect(() => {
     if (token) {
       toast({
         title: "Successfully Logged In",
         status: "success",
         position: "top",
-        duration: 1000,
+        duration: 1300,
         isClosable: true,
       });
       setTimeout(() => {
         navigate("/dashboard");
-      }, 1000);
+      }, 1200);
     }
   }, [token]);
+
+  useEffect(() => {
+    if (auth.error) {
+      toast({
+        title: "Invalid User/Password",
+        status: "error",
+        position: "top",
+        duration: 1000,
+        isClosable: true,
+      });
+    }
+  }, [auth]);
+
+  // let t = localStorage.getItem("token") || "";
+  // if (t) {
+  //   toast({
+  //     title: "User already logged in",
+  //     status: "success",
+  //     position: "top",
+  //     duration: 500,
+  //     isClosable: true,
+  //   });
+  //    console.log("inside t");
+
+  //   navigate("/dashboard");
+  //   return <Navigate to='/dashboard'/>
+  // }
+
 
   return (
     <Box>
@@ -109,8 +124,7 @@ export default function Login() {
                     .then((user) => {
                       console.log(user);
                     })
-                    .catch((e) => console.log(e))
-                }
+                    .catch((e) => console.log(e))}
               >
                 <Center>
                   <Text>Sign in with Google</Text>

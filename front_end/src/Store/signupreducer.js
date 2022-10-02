@@ -27,14 +27,7 @@ import { SIGNUP_ERROR, SIGNUP_LOADING, SIGNUP_SUCCESS, SIGNUP_UPDATE } from "./s
           token: payload.token,
         };
       }
-      case SIGNUP_UPDATE: {
-        return {
-          ...state,
-          loading: false,
-          error: false,
-          token:payload.token
-        }
-        }
+   
       case SIGNUP_ERROR: {
         return {
           ...state,

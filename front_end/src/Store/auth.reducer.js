@@ -3,9 +3,12 @@ import {
     LOGIN_GET_SUCCESS,
     LOGIN_GET_LOADING,
     LOGOUT_GET,
+    UPDATE_GET_SUCCESS,
   } from "./auth.types";
   let token = localStorage.getItem("token") || "";
+  let name = localStorage.getItem("name")   || "";
   let initialstate = {
+    name,
     loading: false,
     error: false,
     token,
@@ -22,6 +25,7 @@ import {
       case LOGIN_GET_SUCCESS: {
         if (payload.token) {
           localStorage.setItem("token", payload.token);
+          localStorage.setItem("name", payload.name);
         }
   
         return {
@@ -29,8 +33,24 @@ import {
           loading: false,
           error: false,
           token: payload.token,
+          name: payload.name
         };
       }
+      case UPDATE_GET_SUCCESS: {
+        if (payload.token) {
+          // localStorage.setItem("token", payload.token);
+          localStorage.setItem("name", payload.name);
+        }
+  
+        return {
+          ...state,
+          loading: false,
+          error: false,
+          token: payload.token,
+          name: payload.name
+        };
+      }
+        
       case LOGIN_GET_ERROR: {
         return {
           ...state,

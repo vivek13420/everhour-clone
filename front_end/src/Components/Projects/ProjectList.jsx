@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   Table,
   Thead,
@@ -43,12 +43,6 @@ const ProjectList = ({ prodata,removePro,handleToggle}) => {
       setEmpUser(res.data)
     })
   }
-  // console.log("employe", empuser);
-  // useEffect(() => {
-  //   userdata()
-  // }, [])
-
-
 const handleClick=()=>{
   userdata()
 }

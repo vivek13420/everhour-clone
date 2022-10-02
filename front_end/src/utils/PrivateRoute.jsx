@@ -9,7 +9,7 @@ const Privateroute = ({ children }) => {
   if (token) {
    return children
   }
-  return<Navigate to="/login"/>
+  return<Navigate to="/"/>
 }
 
 export default Privateroute

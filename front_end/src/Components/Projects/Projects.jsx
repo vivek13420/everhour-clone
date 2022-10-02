@@ -27,7 +27,8 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import ProjectList from './ProjectList'
 import { useSearchParams } from 'react-router-dom'
-
+import { useDispatch, useSelector } from 'react-redux'
+import {store} from "../../Store/store"
 
 const getproject=async()=>{
 let res=await axios.get(`https://cloneofeverhour.herokuapp.com/projects/63356e456e29a1d70aab7c3b`)
@@ -51,6 +52,12 @@ return res
 }
 
 const Projects = () => {
+
+
+  const dispatch = useDispatch();
+let id = useSelector(store=> store.auth._id);
+console.log(id)
+
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()

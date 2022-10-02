@@ -16,15 +16,15 @@ export const signup = (creds) => async (dispatch) => {
     
 }
 
-export const update = (id,newcreds) => async (dispatch) => {
-    dispatch({ type: SIGNUP_LOADING })
-    try {
-        let res = await axios.patch(`https://cloneofeverhour.herokuapp.com/users/${id}`, newcreds)
-        dispatch({ type: SIGNUP_UPDATE, payload: res.data });
-        return res.data
+// export const update = (id,newcreds) => async (dispatch) => {
+//     dispatch({ type: SIGNUP_LOADING })
+//     try {
+//         let res = await axios.patch(`https://cloneofeverhour.herokuapp.com/users/${id}`, newcreds)
+//         dispatch({ type: SIGNUP_UPDATE, payload: res.data });
+//         return res.data
         
-    }
-    catch (e) {
-        dispatch({type:SIGNUP_ERROR})
-     }
-}
+//     }
+//     catch (e) {
+//         dispatch({type:SIGNUP_ERROR})
+//      }
+// }
