@@ -13,7 +13,7 @@ import { FcGoogle } from "react-icons/fc";
 import Navbar from "../Components/Navbar/Navbar";
 
 import Griddrop from "./Review";
-import { useAuth } from "../context/AuthContext.js";
+// import { useAuth } from "../context/AuthContext.js";
 
 const Signup = () => {
   
