@@ -4,8 +4,9 @@ const Project = require('../Project/Project.modal');
 
 const clientSchema = new mongoose.Schema({
  name: {type: String , required: true},
- bill: {type: Number},
- project: {type:mongoose.Schema.Types.ObjectId, ref : 'project'}
+ budget: {type: Boolean, default: true},
+ isActive: {type:Boolean, default:true},
+ project: [{type:mongoose.Schema.Types.ObjectId, ref : 'project'}]
 })
 
 

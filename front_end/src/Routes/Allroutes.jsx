@@ -12,6 +12,8 @@ import UserProfileEdit from "../Pages/ProfileEdit";
 import HoursPage from "../Components/Calender/HoursPage";
 import Pricing from "../Pages/Pricing/Pricing";
 import DemoPage from "../Pages/DemoPageFolder/DemoPage";
+import Clients from "../Components/Clients/Clients";
+import Team from "../Components/Team/Team";
 
 const Allroutes = () => {
   return (
@@ -34,8 +36,8 @@ const Allroutes = () => {
           <Route index element={<DashboardHome />} />
           <Route path="/dashboard/time" element={<HoursPage />} />
           <Route path="/dashboard/project" element={<Projects />} />
-          <Route path="/dashboard/client" element={<h1>Clients</h1>} />
-          <Route path="/dashboard/team" element={<h1>team</h1>} />
+          <Route path="/dashboard/client" element={<Clients/>} />
+          <Route path="/dashboard/team" element={ <Team/>} />
           <Route path="/dashboard/report" element={<h1>report</h1>} />
           <Route path="/dashboard/setting" element={<h1>setting</h1>} />
           <Route path="/dashboard/profile" element={<UserProfileEdit />} />

@@ -19,8 +19,7 @@ const authMiddleware = async (req, res, next) => {
     console.log(user);
     if (user.email == email && user.password == password) {
       next();
-    } 
-    else res.status(401).send("No authentication");
+    } else res.status(401).send("No authentication");
   } catch (e) {
     res.status(400).send(e.message);
   }
@@ -31,7 +30,7 @@ app.get("/", async (req, res) => {
   try {
     let { r } = req.query;
     if (r != undefined) {
-      if ( ["admin", "employee", "client"].includes(r)) {
+      if (["admin", "employee", "client"].includes(r)) {
         let foundUsers = await User.find({ role: r }, { password: 0 });
         res.status(200).send(foundUsers);
       } else {
@@ -57,7 +56,6 @@ app.get("/:id", authMiddleware, async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  
   try {
     let { email, password } = req.body;
     let user = await User.findOne({ email, password });
@@ -68,6 +66,7 @@ app.post("/login", async (req, res) => {
 
     res.send({
       token: `${user.id}:${user.email}:${user.password}:${user.role}`,
+      name: createdUser.username
     });
   } catch (e) {
     res.status(500).send(e.message);
@@ -75,7 +74,6 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
-  
   try {
     let { email } = req.body;
     let user = await User.findOne({ email });
@@ -88,9 +86,8 @@ app.post("/signup", async (req, res) => {
     }
     let createdUser = await User.create(req.body);
     res.send({
-      token: `${createdUser.id}:${createdUser.email}:${createdUser.password}:${
-        createdUser.role
-      }`,
+      token: `${createdUser.id}:${createdUser.email}:${createdUser.password}:${createdUser.role}`,
+      name: createdUser.username
     });
   } catch (e) {
     res.status(500).send(e.message);
@@ -102,10 +99,9 @@ app.post("/signup", async (req, res) => {
 //http://localhost:8080/users/id
 
 app.patch("/:id", authMiddleware, async (req, res) => {
-
   try {
     let token = req.headers.token;
-    let [userid, email, password, role] = token.split(":");    
+    let [userid, email, password, role] = token.split(":");
     let id = req.params.id;
     let updatedProfile = await User.findByIdAndUpdate(id, req.body, {
       new: true,
