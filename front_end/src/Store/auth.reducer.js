@@ -7,11 +7,13 @@ import {
   } from "./auth.types";
   let token = localStorage.getItem("token") || "";
   let name = localStorage.getItem("name")   || "";
+  let id = localStorage.getItem("id")   || "";
   let initialstate = {
     name,
     loading: false,
     error: false,
     token,
+    id:""
   };
   
   export const authReducer = (state = initialstate, { type, payload }) => {
@@ -26,6 +28,8 @@ import {
         if (payload.token) {
           localStorage.setItem("token", payload.token);
           localStorage.setItem("name", payload.name);
+          localStorage.setItem("id", payload.id);
+
         }
   
         return {
@@ -33,7 +37,8 @@ import {
           loading: false,
           error: false,
           token: payload.token,
-          name: payload.name
+          name: payload.name,
+          id:payload.id
         };
       }
       case UPDATE_GET_SUCCESS: {
