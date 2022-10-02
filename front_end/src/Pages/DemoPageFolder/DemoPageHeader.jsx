@@ -13,7 +13,7 @@ import rocketImg from "../../Assets/rocket.png";
 const DemoPageHeader = () => {
   return (
     <VStack pb="20%" pt="65px" width="100%" textAlign="center">
-      <Flex pb="20px" justifyContent="center">
+      <Flex pb="15px" justifyContent="center">
         <Text fontWeight={["bold"]} fontSize={["25px", "30px", "45px"]}>
           Book a 30-min live demo
         </Text>
@@ -25,6 +25,7 @@ const DemoPageHeader = () => {
         lineHeight="30px"
         maxW={["90%", "90%", "60%"]}
         fontSize="20px"
+        fontWeight="bold"
       >
         10+ users? Let one of our customer success experts show you how Everhour
         works, with plenty of time set aside for questions
