@@ -15,7 +15,15 @@ app.get('/', async (req, res)=>{
         res.status(400).send('Error');
     }
 })
-
+app.post('/', async (req , res)=>{
+    try{
+        const newClient = await Client.create(req.body);
+        res.status(200).send(newClient);
+    }
+    catch(e){
+        res.status(401).send("something went wrong");
+    }
+})
 
 
 module.exports = app;

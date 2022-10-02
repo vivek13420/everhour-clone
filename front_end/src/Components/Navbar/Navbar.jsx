@@ -18,6 +18,7 @@ import {
   DrawerCloseButton,
   DrawerHeader,
   DrawerBody,
+  useToast,
 } from "@chakra-ui/react";
 import style from "./Navbar.module.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -37,12 +38,20 @@ import { logout } from "../../Store/auth.action.type";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
   let token = useSelector(store => store.auth.token);
   let name = useSelector(store => store.auth.name);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
+    toast({
+      title: "Successfully Logged Out",
+      status: "success",
+      position: "top",
+      duration: 2000,
+      isClosable: true,
+    });
   };
   return (
     <Box
