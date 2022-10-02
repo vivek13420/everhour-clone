@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import rocketImg from "../../Assets/rocket.png";
+import CalendlyWidget from "./CalendlyWidget";
+
 
 const DemoPageHeader = () => {
   return (
@@ -32,14 +34,17 @@ const DemoPageHeader = () => {
       </Text>
 
       <Flex flexDir={["column", "column", "row"]} pt="20px" gap="20px">
-        <Button
+      <CalendlyWidget/>
+
+        {/* <Button
+        // onClick={Calendly.initPopupWidget({url:'https://calendly.com/vivekrana13420/30min'})}
           py="25px"
           width={["240px", "220px", "200px"]}
           colorScheme="green"
           size="md"
         >
           Schedule Time
-        </Button>
+        </Button> */}
         <Button
           py="24px"
           px="40px"

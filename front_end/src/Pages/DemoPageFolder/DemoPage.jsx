@@ -12,6 +12,7 @@ const DemoPage = () => {
       <VStack width="100vw">
         <Navbar />
         <DemoPageHeader />
+        
         <DemoPageBox />
         <Hide below="md">
           <Footer />
