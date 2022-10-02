@@ -27,7 +27,7 @@
 <h3>Deployed netlify Link</h3>
 <ul>
 <li>
-<a  href="https://the-great-pravhatray-site.netlify.app/">Visit Site Everhour🔗</a>
+<a  href="https://the-great-pravhatray-site.netlify.app/">🔗 Visit Site Everhour 🌐</a>
 </li>
 </ul>
 
