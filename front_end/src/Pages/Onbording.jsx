@@ -21,15 +21,20 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../Store/signupaction";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Onbording() {
   const token = useSelector((store) => store.signup.token);
+  let [email, password] = token.split(":");
+
  
   const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
   const [creds, setcreds] = useState({});
   const dispatch = useDispatch();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const [submitting, setsubmitting] = useState(false);
+  const {register}=useAuth()
 
   function onchange(e) {
     const { name, value } = e.target;
@@ -43,15 +48,53 @@ export default function Onbording() {
 
     dispatch(signup(creds));
     console.log(token);
-    toast({
-      title: "Account created.",
-      position: "top",
-      status: "success",
+    
 
-      isClosable: true,
-    });
-    navigate("/login")
+    if (!creds.email || !creds.password||creds.email===email) {
+      toast({
+        title: "Credentential not valid",
+        position: "top",
+        status: "error",
+       duration:5000,
+        isClosable: true,
+      });
 
+      
+    }
+    else {
+      setsubmitting(true)
+      register(creds.email, creds.password)
+        .then((response) => {
+          console.log(response)
+          toast({
+            title: "Account created.",
+            position: "top",
+            status: "success",
+           duration:5000,
+            isClosable: true,
+          });
+          navigate("/login")
+        
+        
+        
+        })
+        .catch((e) => {
+          console.log(e)
+          toast({
+            title: e.message,
+            position: "top",
+            status: "error",
+           duration:5000,
+            isClosable: true,
+          });
+        
+        
+        })
+        .finally(() => 
+        setsubmitting(false)
+      )
+     
+    }
   };
 
   return (
@@ -104,7 +147,7 @@ export default function Onbording() {
             <Box></Box>
 
             <FormControl id="email" isRequired>
-              <FormLabel>Confirm Email address</FormLabel>
+              <FormLabel>Email address</FormLabel>
               <Input
                 type="email"
                 placeholder="Confirm your Email address.."
@@ -161,6 +204,7 @@ export default function Onbording() {
                     _hover={{
                       bg: "#22c55e ",
                     }}
+                    isLoading={submitting}
                     onClick={onsubmit}
                   >
                     Sign up

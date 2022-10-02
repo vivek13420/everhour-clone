@@ -14,9 +14,38 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { update } from "../Store/signupaction";
 
 export default function UserProfileEdit() {
+  let token = useSelector((store) => store.auth.token);
+  let dispatch = useDispatch();
+  const [id, email, password] = token.split(":");
+  const[cred,setcred]=useState({})
   const toast = useToast();
+
+  function onchange(e) {
+    const { name, value } = e.target;
+    setcred({
+     ...cred,
+      [name]:value
+    })
+    
+  }
+  function onsubmit(e) {
+    e.preventDefault();
+    dispatch(update(id, cred))
+    toast({
+      title: 'Saved successfully',
+     position:'top',
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
+    
+    
+  }
   return (
     <Flex
       minH={"100vh"}
@@ -72,6 +101,8 @@ export default function UserProfileEdit() {
             placeholder="your-email@example.com"
             _placeholder={{ color: "gray.500" }}
             type="email"
+            name="email"
+            onChange={onchange}
           />
         </FormControl>
         <FormControl id="password" isRequired>
@@ -80,6 +111,8 @@ export default function UserProfileEdit() {
             placeholder="password"
             _placeholder={{ color: "gray.500" }}
             type="password"
+            name="password"
+            onChange={onchange}
           />
         </FormControl>
         <FormControl  isRequired>
@@ -88,6 +121,8 @@ export default function UserProfileEdit() {
             placeholder="Role"
             _placeholder={{ color: "gray.500" }}
             type="text"
+            name="role"
+            onChange={onchange}
           />
         </FormControl>
         <Stack spacing={6} direction={["column", "row"]}>
@@ -98,6 +133,7 @@ export default function UserProfileEdit() {
             _hover={{
               bg: "red.500",
             }}
+         
           >
             Cancel
           </Button>
@@ -108,14 +144,8 @@ export default function UserProfileEdit() {
             _hover={{
               bg: "#22c55e",
             }}
-          onClick={()=> toast({
-              title: 'Saved successfully',
-             position:'top',
-              status: 'success',
-              duration: 9000,
-              isClosable: true,
-            })
-          }
+            type="submit"
+          onClick={onsubmit}
           >
             Save changes
           </Button>

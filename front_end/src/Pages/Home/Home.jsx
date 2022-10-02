@@ -26,7 +26,9 @@ import { Link } from "react-router-dom";
 import g_image from "../../Assets/google-image.png";
 import FirstCarousel from "./FirstCarousel";
 import SecondCarousel from "./SecondCarousel";
+import { useAuth } from "../../context/AuthContext";
 const Home = () => {
+  const { SigninwithGoogle } = useAuth();
   return (
     <VStack>
       <Navbar />
@@ -81,7 +83,17 @@ const Home = () => {
                 objectFit="cover"
                 src={g_image}
               />
-              <Text>Or sign up with Google Account</Text>
+              <Text
+                onClick={() =>
+                  SigninwithGoogle()
+                    .then((user) => {
+                      console.log(user);
+                    })
+                    .catch((e) => console.log(e))
+                }
+              >
+                Or sign up with Google Account
+              </Text>
             </HStack>
           </Link>
         </Box>

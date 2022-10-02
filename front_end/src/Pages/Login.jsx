@@ -19,13 +19,15 @@ import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
+import { useAuth } from "../context/AuthContext";
 import { login } from "../Store/auth.action.type";
 
 export default function Login() {
-  const[notauth,setnotauth]=useState(true)
+  const [notauth, setnotauth] = useState(true);
   let token = useSelector((store) => store.auth.token);
   let [email, password] = token.split(":");
   console.log(email, password, "fgsd");
+  const { SigninwithGoogle } = useAuth();
 
   const toast = useToast();
   const [logincred, setlogincred] = useState({});
@@ -44,7 +46,7 @@ export default function Login() {
     console.log(logincred);
     let res = await dispatch(login(logincred));
     console.log("token", token);
-    console.log(' ssecond hahz');
+    console.log(" ssecond hahz");
     // if (!token) {
     //   toast({
     //     title: "Invalid password/Email",
@@ -53,8 +55,8 @@ export default function Login() {
 
     //     isClosable: true,
     //   });
-    // }     
-    
+    // }
+
     console.log(token);
     console.log(email, password);
   };
@@ -64,15 +66,13 @@ export default function Login() {
         title: "Successfully Logged In",
         status: "success",
         position: "top",
-        duration:1000,
+        duration: 1000,
         isClosable: true,
       });
-      setTimeout(()=>{
- navigate("/dashboard");
-      },1000)
-     
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
     }
-  
   }, [token]);
 
   return (
@@ -104,6 +104,13 @@ export default function Login() {
                 variant={"outline"}
                 borderColor={"#a8a29e "}
                 leftIcon={<FcGoogle />}
+                onClick={() =>
+                  SigninwithGoogle()
+                    .then((user) => {
+                      console.log(user);
+                    })
+                    .catch((e) => console.log(e))
+                }
               >
                 <Center>
                   <Text>Sign in with Google</Text>
