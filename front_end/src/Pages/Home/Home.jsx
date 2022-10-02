@@ -77,7 +77,7 @@ const Home = () => {
         </Box>
         <Box>
           <Link>
-            <HStack>
+            {/* <HStack>
               <Image
                 display="inline-block"
                 boxSize="30px"
@@ -89,7 +89,7 @@ const Home = () => {
               >
                 Or sign up with Google Account
               </Text>
-            </HStack>
+            </HStack> */}
           </Link>
         </Box>
       </VStack>

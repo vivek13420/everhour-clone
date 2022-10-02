@@ -13,7 +13,7 @@ import {
     loading: false,
     error: false,
     token,
-    id:""
+    id
   };
   
   export const authReducer = (state = initialstate, { type, payload }) => {

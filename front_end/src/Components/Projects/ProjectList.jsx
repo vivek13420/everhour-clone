@@ -75,7 +75,7 @@ const ProjectList = ({ prodata, removePro, handleToggle }) => {
             <Tbody>
               {prodata.map(e => {
                 return (
-                  <Tr>
+                  <Tr  key={e._id}>
                     <Td>{e.title}</Td>
                     <Td>
                       <Menu closeOnSelect={true}>

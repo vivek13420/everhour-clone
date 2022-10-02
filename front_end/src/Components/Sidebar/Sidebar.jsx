@@ -49,7 +49,7 @@ const Sidebar = () => {
       <Hide below="md">
         <Box width="100%">
           <Flex gap={10}>
-            <NavLink to="/dashboard">
+            <NavLink to="/">
               <Flex gap={3} mb="2em" alignItems="center">
                 <Image src={everhour} w="25px" />
                 <Text

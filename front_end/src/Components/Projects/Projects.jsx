@@ -1,6 +1,11 @@
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
-  Box, Button, Flex, Input, Text, Modal,
+  Box,
+  Button,
+  Flex,
+  Input,
+  Text,
+  Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
@@ -22,140 +27,146 @@ import {
   MenuDivider,
   Skeleton,
   Stack,
-} from '@chakra-ui/react'
-import React from 'react'
-import axios from "axios"
-import { useState } from 'react'
-import { useEffect } from 'react'
-import ProjectList from './ProjectList'
-import { useSearchParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import {store} from "../../Store/store"
+} from "@chakra-ui/react";
+import React from "react";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+import ProjectList from "./ProjectList";
+import { useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { store } from "../../Store/store";
 
-const getproject=async(id)=>{
-let res=await axios.get(`https://cloneofeverhour.herokuapp.com/projects/${id}`)
-return res
-}
+const getproject = async (id) => {
+  let res = await axios.get(
+    `https://cloneofeverhour.herokuapp.com/projects/${id}`
+  );
+  return res;
+};
 
-
-const toggle=async(id,isActive)=>{
-let res=await axios.patch(`https://cloneofeverhour.herokuapp.com/projects/${id}`,{
-  isActive
-})
-return res
-}
+const toggle = async (id, isActive) => {
+  let res = await axios.patch(
+    `https://cloneofeverhour.herokuapp.com/projects/${id}`,
+    {
+      isActive,
+    }
+  );
+  return res;
+};
 
 const Projects = () => {
-let id = useSelector(store=> store.auth.id);
+  let id = useSelector((store) => store.auth.id);
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const toast = useToast()
-  const initialRef = React.useRef(null)
-  const finalRef = React.useRef(null)
-const [prodata,setProData]=useState([])
-const [title,setTitle]=useState()
-const [searchParam,setSearchParam]=useSearchParams()
-const [query,setQuery]=useState(searchParam.get("q") || "")
-const [loading , setLoading] = useState(true);
-// const [searchedData,setSearchedData]=useState([])
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
+  const [prodata, setProData] = useState([]);
+  const [title, setTitle] = useState();
+  const [searchParam, setSearchParam] = useSearchParams();
+  const [query, setQuery] = useState(searchParam.get("q") || "");
+  const [loading, setLoading] = useState(false);
+  // const [searchedData,setSearchedData]=useState([])
 
+  // const search=(query)=>{
+  //   axios.get(`https://cloneofeverhour.herokuapp.com/projects/63356e456e29a1d70aab7c3b?q=${query}`)
+  //     .then((res)=>{
+  //       console.log(res)
+  //       setSearchedData(res)
+  //     })
 
+  // }
 
-// const search=(query)=>{
-//   axios.get(`https://cloneofeverhour.herokuapp.com/projects/63356e456e29a1d70aab7c3b?q=${query}`)
-//     .then((res)=>{
-//       console.log(res)
-//       setSearchedData(res)
-//     })
-
-// }
-
-
-const handleQuery=(e)=>{
-
-  setTimeout(() => {
-      setQuery(e.target.value)
-      
-  }, 1000);
-}
-
-// function handlesearch(){
-//   search(query)
-// }
-
-// useEffect(()=>{
-//   setSearchParam({q:query})
-// },[query])
-
-
-  const projectdata=(id)=>{
-    setLoading(true);
-    getproject(id).then((res)=>{
-setProData(res.data)
-
-    })
+  const handleQuery = (e) => {
     setTimeout(() => {
+      setQuery(e.target.value);
+    }, 1000);
+  };
+
+  // function handlesearch(){
+  //   search(query)
+  // }
+
+  // useEffect(()=>{
+  //   setSearchParam({q:query})
+  // },[query])
+
+  const projectdata = (id) => {
+    setLoading(true);
+    getproject(id).then((res) => {
+      setProData(res.data);
       setLoading(false);
-    }, 1500);
-  }
+    
+    });
 
+  };
 
-const removePro=async(id)=>{
-  const res=await axios.delete(`https://cloneofeverhour.herokuapp.com/projects/${id}`)
-   
-  if(res.status===200){
-    projectdata()
-  }
-}
+  const removePro = async (iddd) => {
+    const res = await axios.delete(
+      `https://cloneofeverhour.herokuapp.com/projects/${iddd}`
+    );
 
+    if (res.status === 200) {
+      projectdata(id);
+    }
+  };
 
-const handleToggle=(id,isActive)=>{
-  toggle(id,isActive).then((res)=>{
-    projectdata()
-    console.log("ress",res)
-  })
-}
+  const handleToggle = (iddd, isActive) => {
+    toggle(iddd, isActive).then((res) => {
+      projectdata(id);
+      console.log("ress", res);
+    });
+  };
 
+  const addPro = async (id, project) => {
+    console.log(id);
 
-const addPro=async(id,project)=>{
-  const res=await axios.post(`https://cloneofeverhour.herokuapp.com/projects/${id}`,project)
-if(res.status===200)
-{
-  projectdata()
-}
-}
+    const res = await axios.post(
+      `https://cloneofeverhour.herokuapp.com/projects/${id}`,
+      project
+    );
 
-  useEffect(()=>{
-    projectdata(id)
-  },[])
+    if (res.status === 200) {
+      projectdata(id);
+    }
+  };
+
+  useEffect(() => {
+    projectdata(id);
+  }, []);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    addPro(id,{title:title})
-  }
-
-
+    e.preventDefault();
+    addPro(id, { title: title });
+  };
 
   return (
     <>
-
       <Box>
-        <Flex justifyContent='space-between'  alignItems='center'>
+        <Flex justifyContent="space-between" alignItems="center">
           <Box>
-            <Text fontSize='x-large' fontWeight='medium' color='#57534e '>Projects</Text>
+            <Text fontSize="x-large" fontWeight="medium" color="#57534e ">
+              Projects
+            </Text>
           </Box>
           <Box>
-
-            <Box m={3} >
-
-              <Button onClick={onOpen} bg={'#22c55e '} color="white" _hover={{ bg: "green" }} ><Text fontSize='sm' fontWeight='thin'>Create Project</Text></Button>
+            <Box m={3}>
+              <Button
+                onClick={onOpen}
+                bg={"#22c55e "}
+                color="white"
+                _hover={{ bg: "green" }}
+              >
+                <Text fontSize="sm" fontWeight="thin">
+                  Create Project
+                </Text>
+              </Button>
 
               <Modal
                 initialFocusRef={initialRef}
                 finalFocusRef={finalRef}
                 isOpen={isOpen}
                 onClose={onClose}
-
               >
                 <ModalOverlay />
 
@@ -164,51 +175,53 @@ if(res.status===200)
                   <ModalCloseButton />
 
                   <form onSubmit={handleSubmit}>
-
                     <ModalBody pb={6}>
                       <FormControl>
                         <FormLabel>Project name</FormLabel>
-                        <Input ref={initialRef}
-                         placeholder='Project name'
-                         value={title}
-                         onChange={(e)=>setTitle(e.target.value)}
+                        <Input
+                          ref={initialRef}
+                          placeholder="Project name"
+                          value={title}
+                          onChange={(e) => setTitle(e.target.value)}
                           name="title"
-/>
+                        />
                       </FormControl>
-
-                    
                     </ModalBody>
 
                     <ModalFooter>
-                      <Button type="submit"
-
+                      <Button
+                        type="submit"
                         onClick={() =>
                           toast({
-                            title: 'Account created.',
+                            title: "Account created.",
                             description: "Your Project is created.",
-                            status: 'success',
+                            status: "success",
                             duration: 1000,
                             onClose,
                             isClosable: true,
-
                           })
-                        } colorScheme='green' mr={3}>
+                        }
+                        colorScheme="green"
+                        mr={3}
+                      >
                         Create Project
                       </Button>
                       <Button onClick={onClose}>Cancel</Button>
                     </ModalFooter>
                   </form>
-
-
                 </ModalContent>
               </Modal>
             </Box>
-
           </Box>
         </Flex>
 
-        <Flex justifyContent='space-between' p={4} mt={6} alignItems='center' bg={'#f5f5f5  '}  >
-
+        <Flex
+          justifyContent="space-between"
+          p={4}
+          mt={6}
+          alignItems="center"
+          bg={"#f5f5f5  "}
+        >
           <Box>
             <Menu>
               <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -217,38 +230,36 @@ if(res.status===200)
               <MenuList>
                 <MenuItem>IsActive</MenuItem>
                 <MenuItem>HasBudget</MenuItem>
-
               </MenuList>
             </Menu>
           </Box>
 
-          <Box display='flex'>
-            <Input type='text' onChange={handleQuery} variant='filled' placeholder='Search Projects...' />
-            <Button >Submit</Button>
+          <Box display="flex">
+            <Input
+              type="text"
+              onChange={handleQuery}
+              variant="filled"
+              placeholder="Search Projects..."
+            />
+            <Button>Submit</Button>
           </Box>
-
         </Flex>
 
-
         <Box>
-        { loading  && (<Stack mt='2rem'  pr='1rem'> <Skeleton height='40px' /><Skeleton height='40px' /><Skeleton height='40px' /></Stack>)}
-        {
-          !loading && prodata && (
-            <ProjectList handleToggle={handleToggle}  prodata={prodata} removePro={removePro} />
-
-          )
-        }
+          { loading  && (<Stack mt='2rem'  pr='1rem'> <Skeleton height='40px' /><Skeleton height='40px' /><Skeleton height='40px' /></Stack>)}
+         
+          
+           {!loading && prodata && (
+            <ProjectList
+              handleToggle={handleToggle}
+              prodata={prodata}
+              removePro={removePro}
+            />
+          )}
+        </Box>
       </Box>
-      </Box>
-
     </>
+  );
+};
 
-    
-  )
-}
-
-export default Projects
-
-
-
-
+export default Projects;
