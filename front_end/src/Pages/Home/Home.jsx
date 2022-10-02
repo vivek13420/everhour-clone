@@ -26,12 +26,15 @@ import { Link, Navigate } from "react-router-dom";
 import g_image from "../../Assets/google-image.png";
 import FirstCarousel from "./FirstCarousel";
 import SecondCarousel from "./SecondCarousel";
+import { useAuth } from "../../context/AuthContext";
+
 import Footer from "../../Components/Footer/Footer";
 import SmallFooter from "../../Components/Footer/SmallFooter";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { SigninwithGoogle } = useAuth();
   return (
     <VStack>
       <Navbar />
@@ -71,6 +74,29 @@ const Home = () => {
           >
             Try Free
           </Button>
+        </Box>
+        <Box>
+          <Link>
+            <HStack>
+              <Image
+                display="inline-block"
+                boxSize="30px"
+                objectFit="cover"
+                src={g_image}
+              />
+              <Text
+                onClick={() =>
+                  SigninwithGoogle()
+                    .then((user) => {
+                      console.log(user);
+                    })
+                    .catch((e) => console.log(e))
+                }
+              >
+                Or sign up with Google Account
+              </Text>
+            </HStack>
+          </Link>
         </Box>
       </VStack>
       <FirstCarousel />

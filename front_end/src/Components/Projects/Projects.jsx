@@ -27,21 +27,14 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import ProjectList from './ProjectList'
 import { useSearchParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import {store} from "../../Store/store"
 
-
-const getproject=async()=>{
-let res=await axios.get(`https://cloneofeverhour.herokuapp.com/projects/63356e456e29a1d70aab7c3b`)
+const getproject=async(id)=>{
+let res=await axios.get(`https://cloneofeverhour.herokuapp.com/projects/${id}`)
 return res
 }
 
-
-
-
-
-// const getUsers=async()=>{
-//   let res=await axios.get(`https://cloneofeverhour.herokuapp.com/users?r=admin`)
-//   return res
-//   }
 
 const toggle=async(id,isActive)=>{
 let res=await axios.patch(`https://cloneofeverhour.herokuapp.com/projects/${id}`,{
@@ -51,6 +44,7 @@ return res
 }
 
 const Projects = () => {
+let id = useSelector(store=> store.auth.id);
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
@@ -60,18 +54,18 @@ const [prodata,setProData]=useState([])
 const [title,setTitle]=useState()
 const [searchParam,setSearchParam]=useSearchParams()
 const [query,setQuery]=useState(searchParam.get("q") || "")
-const [searchedData,setSearchedData]=useState([])
+// const [searchedData,setSearchedData]=useState([])
 
 
 
-const search=(query)=>{
-  axios.get(`https://cloneofeverhour.herokuapp.com/projects/63356e456e29a1d70aab7c3b?q=${query}`)
-    .then((res)=>{
-      console.log(res)
-      setSearchedData(res)
-    })
+// const search=(query)=>{
+//   axios.get(`https://cloneofeverhour.herokuapp.com/projects/63356e456e29a1d70aab7c3b?q=${query}`)
+//     .then((res)=>{
+//       console.log(res)
+//       setSearchedData(res)
+//     })
 
-}
+// }
 
 
 const handleQuery=(e)=>{
@@ -82,22 +76,22 @@ const handleQuery=(e)=>{
   }, 1000);
 }
 
-function handlesearch(){
-  search(query)
-}
+// function handlesearch(){
+//   search(query)
+// }
 
-useEffect(()=>{
-  setSearchParam({q:query})
-},[query])
+// useEffect(()=>{
+//   setSearchParam({q:query})
+// },[query])
 
 
-  const projectdata=()=>{
-    getproject().then((res)=>{
+  const projectdata=(id)=>{
+    getproject(id).then((res)=>{
 setProData(res.data)
 
     })
   }
-// console.log("prodata",prodata)
+
 
 const removePro=async(id)=>{
   const res=await axios.delete(`https://cloneofeverhour.herokuapp.com/projects/${id}`)
@@ -116,34 +110,21 @@ const handleToggle=(id,isActive)=>{
 }
 
 
-const addPro=async(project)=>{
-  const res=await axios.post(`https://cloneofeverhour.herokuapp.com/projects/63356e456e29a1d70aab7c3b`,project)
+const addPro=async(id,project)=>{
+  const res=await axios.post(`https://cloneofeverhour.herokuapp.com/projects/${id}`,project)
 if(res.status===200)
 {
   projectdata()
-
 }
 }
-
-
-//   const userdata=()=>{
-//     getUsers().then((res)=>{
-// // console.log("users2",res.data);
-//     })
-//   }
-
-//   useEffect(()=>{
-//     userdata()
-//   },[])
-
 
   useEffect(()=>{
-    projectdata()
+    projectdata(id)
   },[])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    addPro({title:title})
+    addPro(id,{title:title})
   }
 
 
@@ -158,7 +139,7 @@ if(res.status===200)
           </Box>
           <Box>
 
-            <Box>
+            <Box m={3} >
 
               <Button onClick={onOpen} bg={'#22c55e '} color="white" _hover={{ bg: "green" }} ><Text fontSize='sm' fontWeight='thin'>Create Project</Text></Button>
 
@@ -236,7 +217,7 @@ if(res.status===200)
 
           <Box display='flex'>
             <Input type='text' onChange={handleQuery} variant='filled' placeholder='Search Projects...' />
-            <Button onClick={handlesearch}>Submit</Button>
+            <Button >Submit</Button>
           </Box>
 
         </Flex>

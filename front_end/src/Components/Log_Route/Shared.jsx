@@ -1,7 +1,7 @@
 
 
 
-import { Box, Flex, Hide, Show } from "@chakra-ui/react";
+import { Box, Flex, Hide, Show, SimpleGrid } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import Humber from "../Sidebar/Humber";
 // import { Navbar } from "./Navbar";
@@ -11,26 +11,26 @@ export const Shared = () => {
   return (
     <>
       <Box>
-        <Show below='md'>
+        <Show below='lg'>
           <Humber />
         </Show>
       </Box>
 
 
-      <Flex gap={"40px"}>
+      <Flex  gap={"40px"}>
         <Box width="14.5%" p={5} position="fixed">
-          <Hide below='md'>
+          <Hide below='lg'>
             <Sidebar />
           </Hide>
         </Box>
-        <Hide below='md'>
+        <Hide below='lg'>
           <Box ml="17%" width={'100%'} >
             <Outlet />
           </Box>
         </Hide>
-      </Flex>
+      </Flex >
 
-      <Show below='md'>
+      <Show below='lg'>
         <Box width={'100%'}>
         <Outlet />
         </Box>

@@ -24,12 +24,14 @@ import { useNavigate } from "react-router-dom";
 
 export default function Onbording() {
   const token = useSelector((store) => store.signup.token);
- 
+  let [email, password] = token.split(":");
+
   const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
   const [creds, setcreds] = useState({});
   const dispatch = useDispatch();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const [submitting, setsubmitting] = useState(false);
 
   function onchange(e) {
     const { name, value } = e.target;
@@ -44,14 +46,13 @@ export default function Onbording() {
     dispatch(signup(creds));
     console.log(token);
     toast({
-      title: "Account created.",
-      position: "top",
+      title: "Successfully Logged In",
       status: "success",
-
+      position: "top",
+      duration: 1300,
       isClosable: true,
     });
-    navigate("/login")
-
+    navigate("/login");
   };
 
   return (
@@ -104,7 +105,7 @@ export default function Onbording() {
             <Box></Box>
 
             <FormControl id="email" isRequired>
-              <FormLabel>Confirm Email address</FormLabel>
+              <FormLabel>Email address</FormLabel>
               <Input
                 type="email"
                 placeholder="Confirm your Email address.."
@@ -150,7 +151,7 @@ export default function Onbording() {
                   </Text>
                 </Checkbox>
               </Stack>
-              <FormControl >
+              <FormControl>
                 <Center>
                   <Button
                     type="submit"
@@ -161,6 +162,7 @@ export default function Onbording() {
                     _hover={{
                       bg: "#22c55e ",
                     }}
+                    isLoading={submitting}
                     onClick={onsubmit}
                   >
                     Sign up

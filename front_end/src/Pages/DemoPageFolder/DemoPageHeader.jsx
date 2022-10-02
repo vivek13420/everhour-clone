@@ -9,11 +9,13 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import rocketImg from "../../Assets/rocket.png";
+import CalendlyWidget from "./CalendlyWidget";
+
 
 const DemoPageHeader = () => {
   return (
-    <VStack pb="40px" pt="65px" width="100%" textAlign="center">
-      <Flex pb="20px" justifyContent="center">
+    <VStack pb="8%" pt="65px" width="100%" textAlign="center">
+      <Flex pb="15px" justifyContent="center">
         <Text fontWeight={["bold"]} fontSize={["25px", "30px", "45px"]}>
           Book a 30-min live demo
         </Text>
@@ -25,20 +27,24 @@ const DemoPageHeader = () => {
         lineHeight="30px"
         maxW={["90%", "90%", "60%"]}
         fontSize="20px"
+        fontWeight="bold"
       >
         10+ users? Let one of our customer success experts show you how Everhour
         works, with plenty of time set aside for questions
       </Text>
 
       <Flex flexDir={["column", "column", "row"]} pt="20px" gap="20px">
-        <Button
+      <CalendlyWidget/>
+
+        {/* <Button
+        // onClick={Calendly.initPopupWidget({url:'https://calendly.com/vivekrana13420/30min'})}
           py="25px"
           width={["240px", "220px", "200px"]}
           colorScheme="green"
           size="md"
         >
           Schedule Time
-        </Button>
+        </Button> */}
         <Button
           py="24px"
           px="40px"
