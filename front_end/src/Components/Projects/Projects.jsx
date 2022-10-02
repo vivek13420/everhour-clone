@@ -20,6 +20,8 @@ import {
   MenuGroup,
   MenuOptionGroup,
   MenuDivider,
+  Skeleton,
+  Stack,
 } from '@chakra-ui/react'
 import React from 'react'
 import axios from "axios"
@@ -54,6 +56,7 @@ const [prodata,setProData]=useState([])
 const [title,setTitle]=useState()
 const [searchParam,setSearchParam]=useSearchParams()
 const [query,setQuery]=useState(searchParam.get("q") || "")
+const [loading , setLoading] = useState(true);
 // const [searchedData,setSearchedData]=useState([])
 
 
@@ -86,10 +89,14 @@ const handleQuery=(e)=>{
 
 
   const projectdata=(id)=>{
+    setLoading(true);
     getproject(id).then((res)=>{
 setProData(res.data)
 
     })
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
   }
 
 
@@ -224,9 +231,9 @@ if(res.status===200)
 
 
         <Box>
-         
+        { loading  && (<Stack mt='2rem'  pr='1rem'> <Skeleton height='40px' /><Skeleton height='40px' /><Skeleton height='40px' /></Stack>)}
         {
-          prodata && (
+          !loading && prodata && (
             <ProjectList handleToggle={handleToggle}  prodata={prodata} removePro={removePro} />
 
           )
