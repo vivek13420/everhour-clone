@@ -25,25 +25,33 @@ import { login } from "../Store/auth.action.type";
 export default function Login() {
   let token = useSelector(store => store.auth.token);
   let auth = useSelector(store => store.auth);
-  const { SigninwithGoogle } = useAuth();
+  // const { SigninwithGoogle } = useAuth();
 
   const toast = useToast();
   const [logincred, setlogincred] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
 
-  const onchange = e => {
+  const onchange = (e) => {
     const { name, value } = e.target;
     setlogincred({
       ...logincred,
       [name]: value,
     });
   };
-  const onsubmit = e => {
+  const onsubmit =(e) => {
     e.preventDefault();
     // console.log(logincred);
     dispatch(login(logincred));
-  };
+    
+
+      
+    }
+   
+       
+    
+  
 
 
 
@@ -113,7 +121,7 @@ export default function Login() {
             p={8}
           >
             <Stack spacing={4}>
-              <Button
+              {/* <Button
                 w={"290px"}
                 maxW={"lg"}
                 variant={"outline"}
@@ -132,7 +140,7 @@ export default function Login() {
               </Button>
               <Center>
                 <Text color={"#a8a29e "}>or</Text>
-              </Center>
+              </Center> */}
 
               <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
