@@ -68,8 +68,8 @@ const TeamList = ({ prodata, removePro, handleToggle }) => {
                   <Th>Budget</Th>
                 </Hide> */}
                 <Th>Status</Th>
-                <Th>Remove</Th>
-                <Th>Toggle</Th>
+                {/* <Th>Remove</Th>
+                <Th>Toggle</Th> */}
               </Tr>
             </Thead>
             <Tbody>
@@ -108,7 +108,7 @@ const TeamList = ({ prodata, removePro, handleToggle }) => {
                       <Td>{e.isBudget ? "Not Funded" : "Funded"}</Td>
                     </Hide> */}
                     <Td>
-                      {Math.random()*10>5 ? (
+                      {true ? (
                         <Button
                           variant={"solid"}
                           size="md"
@@ -131,7 +131,7 @@ const TeamList = ({ prodata, removePro, handleToggle }) => {
                         </Button>
                       )}
                     </Td>
-                    <Td>
+                    {/* <Td>
                       <IconButton
                         // onClick={() => removePro(e._id)}
                         size="sm"
@@ -140,8 +140,8 @@ const TeamList = ({ prodata, removePro, handleToggle }) => {
                         _focus={{ outline: "none" }}
                         icon={<DeleteIcon />}
                       />
-                    </Td>
-                    <Td>
+                    </Td> */}
+                    {/* <Td>
                       <IconButton
                         // onClick={() => handleToggle(e._id, !e.isActive)}
                         size="sm"
@@ -150,7 +150,7 @@ const TeamList = ({ prodata, removePro, handleToggle }) => {
                         _focus={{ outline: "none" }}
                         icon={<EditIcon />}
                       />
-                    </Td>
+                    </Td> */}
                   </Tr>
                 );
               })}

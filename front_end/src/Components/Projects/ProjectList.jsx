@@ -46,12 +46,12 @@ const ProjectList = ({ prodata, removePro, handleToggle }) => {
   const handleClick = () => {
     userdata();
   };
-  const handleTeam = async id => {
-    console.log("id", id);
+  const handleTeam = async (emp_id,project_id) => {
+ 
 
     const res = await axios.patch(
-      `https://cloneofeverhour.herokuapp.com/projects/${id}`,
-      { teamMembers: id },
+      `https://cloneofeverhour.herokuapp.com/projects/${project_id}`,
+      { teamMembers: emp_id },
     );
     console.log(res);
   };
@@ -92,7 +92,7 @@ const ProjectList = ({ prodata, removePro, handleToggle }) => {
                             return (
                               <MenuOptionGroup type="checkbox">
                                 <MenuItemOption
-                                  onClick={() => handleTeam(e._id)}
+                                  onClick={() => {handleTeam(emp._id,e._id);}}
                                   value="phone"
                                 >
                                   {emp.username}

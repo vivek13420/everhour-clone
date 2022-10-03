@@ -36,10 +36,11 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import ClientList from "../Clients/ClientList";
 import TeamList from "./TeamList";
+import { useSelector } from "react-redux";
 
-const getproject = async () => {
-      return  axios.get(
-    `https://cloneofeverhour.herokuapp.com/teams/63356e456e29a1d70aab7c3b`,
+const getproject = async (id) => {
+      return await axios.get(
+    `https://cloneofeverhour.herokuapp.com/teams/${id}`,
   );
 //   return res;
 };
@@ -70,7 +71,8 @@ const Clients = () => {
   const [query, setQuery] = useState(searchParam.get("q") || "");
   const [searchedData, setSearchedData] = useState([]);
   const [loading , setLoading] = useState(true);
-
+  let id = useSelector((store) => store.auth.id);
+console.log(id)
   const search = query => {
     axios
       .get(
@@ -96,9 +98,9 @@ const Clients = () => {
     setSearchParam({ q: query });
   }, [query]);
 
-  const projectdata = () => {
+  const projectdata = (id) => {
     setLoading(true);
-    getproject().then(res => {
+    getproject(id).then(res => {
       setProData(res.data);
     });
     setTimeout(() => {
@@ -107,15 +109,15 @@ const Clients = () => {
   };
   // console.log("prodata",prodata)
 
-  const removePro = async id => {
+  const removePro = async idd => {
     console.log(id);
     try{
       const res = await axios.delete(
-        `https://cloneofeverhour.herokuapp.com/clients/${id}`,
+        `https://cloneofeverhour.herokuapp.com/clients/${idd}`,
       );
   
       if (res.status === 200) {
-        projectdata();
+        projectdata(id);
       }      
     }
     catch(e){
@@ -123,22 +125,22 @@ const Clients = () => {
     }
   };
 
-  const handleToggle = (id, isActive) => {
-    toggle(id, isActive).then(res => {
-      projectdata();
+  const handleToggle = (idd, isActive) => {
+    toggle(idd, isActive).then(res => {
+      projectdata(id);
       console.log("ress", res);
     });
   };
 
-  const addPro = async project => {
-    const res = await axios.post(
-      `https://cloneofeverhour.herokuapp.com/teams/63356e456e29a1d70aab7c3b`,
-      project,
-    );
-    if (res.status === 200) {
-      projectdata();
-    }
-  };
+  // const addPro = async  project => {
+  //   const res = await axios.post(
+  //     `https://cloneofeverhour.herokuapp.com/teams/${id}`,
+  //     project,
+  //   );
+  //   if (res.status === 200) {
+  //     projectdata();
+  //   }
+  // };
 
   //   const userdata=()=>{
   //     getUsers().then((res)=>{
@@ -152,13 +154,13 @@ const Clients = () => {
 
   useEffect(() => {
     // setLoading(true);
-    projectdata();
+    projectdata(id);
     // setLoading(false);
   }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
-    addPro({ name: title });
+    // addPro({ name: title });
   };
 // if(loading) return (<div>Loading...</div>)
   return (
